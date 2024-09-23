@@ -42,6 +42,16 @@ export const SignUpPage = () => {
         }
     })
 
+    const newMessageMutation = useMutation({
+        mutationFn : ({newMessage} : {newMessage : { 
+            newMessage : {
+                id: string, 
+                ownerID : string | undefined, 
+                message : string, 
+                createdAt: Date
+        }}}) => axios.post(`http://localhost:3000/messages/`, newMessage)
+    })
+
     const signUp = async () => {
 
         const login = loginRef.current?.value
@@ -73,6 +83,27 @@ export const SignUpPage = () => {
 
         createAccountMutation.mutate({ newUser : newUserObject} )
         currentUserMutation.mutate({ newCurrent : { id : newUserObject.id, isLogged : true}})
+
+
+        type newMessageType = {
+            id : string,
+            ownerID : string | undefined,
+            message : string,
+            createdAt : Date
+        }
+
+        const newMessageObject : {newMessageObject : newMessageType }= {
+            id : crypto.randomUUID(),
+            ownerID : newUserObject.id,
+            message : "You have created account successfully",
+            createdAt : new Date()
+        }
+
+        newMessageMutation.mutate({newMessage : newMessageObject},{
+            onSuccess : () => {
+                queryClient.invalidateQueries(["messages", newUserObject.id])
+            }
+        })
 
         redirectToPage("/")
     }

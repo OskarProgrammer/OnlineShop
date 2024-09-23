@@ -13,6 +13,7 @@ import axios from "axios"
 
 // utils
 import { redirectToPage } from "../utils/utils"
+import { MessageType } from "../types/types"
 
 
 
@@ -36,6 +37,15 @@ export const SignInPage = () => {
         onSuccess : () => {
             queryClient.invalidateQueries(["currentUser"])
         }
+    })
+
+    const currentUserMessagesMutation = useMutation({
+        mutationFn : ({newMessage} : {newMessage : { 
+            newMessage : {id: string, 
+            ownerID : string | undefined, 
+            message : string, 
+            createdAt: Date
+        }}}) => axios.post(`http://localhost:3000/messages/`, newMessage)
     })
 
     
@@ -63,6 +73,29 @@ export const SignInPage = () => {
         }
 
         currentUserMutation.mutate({ newCurrent : newCurrentUser})
+
+
+        type newMessageType = {
+            id : string,
+            ownerID : string | undefined,
+            message : string,
+            createdAt : Date
+        }
+
+        const newMessage : {newMessage : newMessageType } = {
+            id : crypto.randomUUID(),
+            ownerID : newCurrentUser?.id,
+            message : "You have been successfully logged in",
+            createdAt : new Date()
+        }
+
+        currentUserMessagesMutation.mutate({
+            newMessage : newMessage }, {
+                onSuccess : () => {
+                    queryClient.invalidateQueries(["messages", newCurrentUser.id])
+                }
+            })
+
 
         redirectToPage("/")
     }

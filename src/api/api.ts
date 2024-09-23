@@ -3,9 +3,14 @@
 import axios from "axios"
 
 // types
-import { CurrentUser, User } from "../types/types"
+import { CurrentUser, MessageType, User } from "../types/types"
 
 
+export const deleteMessageById = async ({messageID} : { messageID : string }) => {
+    try {
+        await axios.delete(`http://localhost:3000/messages/${messageID}`)
+    } catch { throw new Error("Error during removing message")}
+}
 
 export const getCurrentUser = async () => {
 
@@ -53,3 +58,12 @@ export const getUserByName = async (userName : string | undefined) : Promise<Use
 
     return user[0]
 }
+
+export const getMessagesOfUser = async (userID : string) => {
+    const messages = await axios.get(`http://localhost:3000/messages/`).then(res => res.data)
+
+    const result = messages.filter( (message : MessageType) => message.ownerID == userID)
+
+    return result
+}
+

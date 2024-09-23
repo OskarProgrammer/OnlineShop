@@ -13,6 +13,13 @@ export type User = {
     password : string | undefined
 }
 
+export type MessageType = {
+    id : string,
+    ownerID : string,
+    message : string,
+    createdAt : Date
+}
+
 export type CreateAccountParams = {
     newUser : User
 }

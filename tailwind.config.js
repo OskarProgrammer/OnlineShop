@@ -9,7 +9,7 @@ export default {
       "colors": 
         {
           "primaryColor" : "#6366f1",
-          "secondColor" : "white",
+          "secondColor" : "#f8fafc",
           "shadowColor" : "#1e1b4b",
           "formButtonBg" : "#16a34a",
           "shadowColorGreen" : "#052e16",

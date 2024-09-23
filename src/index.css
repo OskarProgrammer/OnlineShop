@@ -98,7 +98,7 @@
 
     /* ERROR PAGE SECTION */
     .errorPage {
-        @apply text-center w-screen h-screen text-slate-950 flex flex-col p-3 text-[50px] font-extrabold justify-center items-center;
+        @apply text-center w-screen h-screen bg-primaryColor text-secondColor flex flex-col p-3 text-[50px] font-extrabold justify-center items-center;
     }
 
     .bug:hover {
@@ -106,11 +106,29 @@
     }
 
     .linkTag {
-        @apply font-thin p-5 rounded-lg shadow-inner efectOfTransitionSlow shadow-slate-950 text-[30px];
-        @apply hover:shadow-xl hover:bg-slate-950 hover:text-white hover:scale-90;
+        @apply font-thin p-5 rounded-lg shadow-inner efectOfTransitionSlow shadow-shadowColor text-[30px];
+
+        /* hover */
+        @apply hover:shadow-xl hover:bg-shadowColor hover:text-secondColor hover:scale-90;
     }
 
     /* END OF ERROR PAGE SECTION */
 
+    /* MESSAGE CONTAINER COMPONENT SECTION */
+
+    .messageContainer {
+        @apply absolute w-1/6 m-5 text-primaryColor text-[15px] text-center flex flex-col gap-3
+        bottom-0
+    }
+
+    .message {
+        @apply animate-fade-up p-5 bg-formButtonBg rounded-3xl break-all text-secondColor relative
+    }
+
+    .removeMessageButton {
+        @apply bg-errorMessageColor rounded-full absolute top-[-10px] right-[-10px] w-[30px] h-[30px]
+    }
+
+    /* END OF MESSAGE CONTAINER COMPONENT SECTION */
 
 }
