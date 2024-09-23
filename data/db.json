@@ -1,0 +1,18 @@
+{
+  "currentUser": {
+    "id": "2",
+    "isLogged": true
+  },
+  "users": [
+    {
+      "id": "2",
+      "login": "Oskar",
+      "password": "root"
+    },
+    {
+      "id": "47c6cad6-f2ee-4272-81ae-205be5ae7536",
+      "login": "Robert",
+      "password": "123"
+    }
+  ]
+}

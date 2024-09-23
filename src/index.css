@@ -1,3 +1,116 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer components{
+
+    .efectOfTransition {
+        @apply transition-all duration-500 ease-out;
+    }
+
+    .efectOfTransitionSlow {
+      @apply transition-all duration-[750ms] ease-out; 
+    }
+
+
+    /* MAIN LAYOUT SECTION */
+    .mainLayout{
+        @apply min-h-screen bg-primaryColor flex flex-col gap-5
+    }
+
+    .navBar {
+        @apply text-[25px] m-10 grid grid-cols-6 gap-x-5 gap-y-0;
+        @apply grid-rows-2
+    }
+
+    .navButton {
+        @apply bg-secondColor text-primaryColor flex items-center font-bold rounded-lg p-5 efectOfTransitionSlow shadow-inner shadow-shadowColor;
+        
+        /* hover effects */
+        @apply hover:shadow-xl hover:scale-105 hover:shadow-shadowColor
+    }
+
+    .icon {
+        @apply text-[30px]
+    }
+
+    .leftSide {
+        @apply col-span-3 row-start-2 flex justify-start p-5 gap-5
+    }
+
+    .centerSide {
+        @apply col-span-full flex justify-center p-5 items-center align-middle text-secondColor text-[50px] font-bold;
+        @apply animate-bounce animate-infinite animate-ease-in-out animate-duration-[2500ms]
+
+    }
+
+    .rightSide {
+        @apply col-span-3 row-start-2 flex justify-end p-5 gap-5
+    }
+
+    /* END OF MAIN LAYOUT SECTION */
+
+    /* SIGN IN PAGE SECTION AND SIGN UP PAGE SECTION */
+
+    .form {
+        @apply bg-secondColor shadow shadow-secondColor lg:sm:w-4/12 w-9/12 rounded-2xl p-10 flex flex-col gap-5 justify-center text-center mx-auto;
+
+        /* animation section */
+        @apply animate-fade-down animate-duration-700
+    }
+
+    .headerOfForm {
+        @apply text-[30px] text-primaryColor font-bold
+    }
+
+    .inputOfForm{
+        @apply text-center text-primaryColor shadow-inner shadow-shadowColor p-5 font-bold rounded-xl efectOfTransition;
+
+        /* hover */
+        @apply hover:shadow-lg hover:bg-primaryColor hover:text-secondColor
+    }
+
+    .inputOfForm:focus {
+        @apply outline-primaryColor outline-4
+    }
+
+    .inputOfForm::selection{
+        @apply text-primaryColor bg-secondColor
+    }
+
+    .messageForm {
+        @apply text-primaryColor text-lg
+    }
+
+    .errorMessageForm {
+        @apply text-errorMessageColor text-lg
+    }
+
+    .formButton {
+        @apply p-3 rounded-xl shadow-inner shadow-shadowColorGreen efectOfTransition text-green-600 font-bold mx-auto w-4/12;
+
+        /* hover */
+        @apply hover:bg-formButtonBg hover:shadow-xl hover:text-secondColor hover:scale-105
+    }
+
+    /* END OF SIGN IN PAGE SECTION AND SIGN UP PAGE SECTION*/
+
+    /* ERROR PAGE SECTION */
+    .errorPage {
+        @apply text-center w-screen h-screen text-slate-950 flex flex-col p-3 text-[50px] font-extrabold justify-center items-center;
+    }
+
+    .bug:hover {
+        @apply animate-wiggle;
+    }
+
+    .linkTag {
+        @apply font-thin p-5 rounded-lg shadow-inner efectOfTransitionSlow shadow-slate-950 text-[30px];
+        @apply hover:shadow-xl hover:bg-slate-950 hover:text-white hover:scale-90;
+    }
+
+    /* END OF ERROR PAGE SECTION */
+
+
+}
