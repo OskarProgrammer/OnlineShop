@@ -43,16 +43,12 @@ export const NavBar = () => {
                 
             </div>
 
-            {/* center side of nav bar */}
-            <div className="centerSide">
-                Crow Shop
-            </div>
-
             {/* right side of nav bar */}
             <div className="rightSide">
 
                 {!currentUser?.isLogged ? 
                         <>
+                        
                             <NavLink to="/signIn" className="navButton">
                                 Sign in
                             </NavLink>
@@ -60,13 +56,20 @@ export const NavBar = () => {
                             <NavLink to="/signUp" className="navButton">
                                 Sign up
                             </NavLink>
+
                         </> : ""}
                 
                 {currentUser?.isLogged ? 
                         <>
+
+                            <NavLink to="/" className="navButton">
+                                <i className="bi bi-basket icon"/>
+                            </NavLink>
+
                             <button onClick={()=>{ logOut() }} className="navButton">
                                 Log out
                             </button>
+
                         </> : ""}
 
             </div>

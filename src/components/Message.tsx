@@ -34,20 +34,22 @@ export const Message = ({messageInfo} : Props) => {
 
     useEffect(()=>{
         const interval = setInterval(()=>{
-            if ( time == maxTime ){
+            if ( time == maxTime ) {
                 removeMessageMutation.mutate({ messageID : messageInfo.id })
             }
+
             setTime(time++)
+
         }, 1000)
 
         return () => { clearInterval(interval) }
     }, [])
 
+
     return (
         <div className="message">
             <p>{messageInfo.message}</p>
-            <button onClick={()=>{ removeMessage() }} className="removeMessageButton"><i className="bi bi-trash"/></button>
-            <p>Time to disapear {maxTime - time}</p>
+            <button onClick={()=>{ removeMessage() }} className={`removeMessageButton`}><i className="bi bi-trash"/></button>
         </div>
     )
 }

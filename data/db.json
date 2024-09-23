@@ -1,7 +1,7 @@
 {
   "currentUser": {
-    "id": "2",
-    "isLogged": true
+    "id": "",
+    "isLogged": false
   },
   "users": [
     {
@@ -20,5 +20,28 @@
       "password": "123"
     }
   ],
-  "messages": []
+  "messages": [],
+  "items": [
+    {
+      "id": "1",
+      "name": "koszyk",
+      "desc": "opis produktudsadsadsadsadasdasdasdsadsadasdaddsadasdsadfsadas",
+      "price": 20,
+      "amount": 100
+    },
+    {
+      "id": "2",
+      "name": "cos innego",
+      "desc": "opis produktudsadsadsadsadasdasdasdsadsadasdaddsadasdsadfsadas",
+      "price": 20,
+      "amount": 100
+    },
+    {
+      "id": "3",
+      "name": "cos innego",
+      "desc": "opis produktudsadsadsadsadasdasdasdsadsadasdaddsadasdsadfsadas",
+      "price": 20,
+      "amount": 100
+    }
+  ]
 }

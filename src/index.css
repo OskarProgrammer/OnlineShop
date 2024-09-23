@@ -19,16 +19,24 @@
         @apply min-h-screen bg-primaryColor flex flex-col gap-5
     }
 
+    .btnScrollToTop {
+        @apply z-50 fixed right-10 bottom-10 mx-auto w-20 h-20 rounded-full bg-secondColor efectOfTransition;
+
+        /* hover */
+        @apply hover:bg-primaryColor hover:border-8 hover:border-secondColor hover:text-secondColor
+    }
+
     .navBar {
-        @apply text-[25px] m-10 grid grid-cols-6 gap-x-5 gap-y-0;
-        @apply grid-rows-2
+        @apply text-[25px] m-10 grid grid-cols-6 gap-x-5 gap-y-0 z-10 bg-secondColor p-3;
+        @apply border-8 border-secondColor rounded-xl
     }
 
     .navButton {
-        @apply bg-secondColor text-primaryColor flex items-center font-bold rounded-lg p-5 efectOfTransitionSlow shadow-inner shadow-shadowColor;
+        @apply bg-secondColor text-primaryColor flex items-center  justify-center text-center
+        font-bold rounded-lg p-5 efectOfTransitionSlow shadow-inner shadow-shadowColor;
         
         /* hover effects */
-        @apply hover:shadow-xl hover:scale-105 hover:shadow-shadowColor
+        @apply hover:shadow-xl hover:scale-105 hover:shadow-shadowColor hover:bg-primaryColor hover:text-secondColor
     }
 
     .icon {
@@ -36,17 +44,16 @@
     }
 
     .leftSide {
-        @apply col-span-3 row-start-2 flex justify-start p-5 gap-5
+        @apply col-span-3 flex justify-start p-5 gap-5
     }
 
-    .centerSide {
-        @apply col-span-full flex justify-center p-5 items-center align-middle text-secondColor text-[50px] font-bold;
-        @apply animate-bounce animate-infinite animate-ease-in-out animate-duration-[2500ms]
-
+    .title {
+        @apply flex justify-center px-5 mt-10 items-center align-middle text-secondColor text-[50px] font-bold;
+        @apply animate-pulse animate-infinite animate-ease-in-out animate-duration-[1500ms]
     }
 
     .rightSide {
-        @apply col-span-3 row-start-2 flex justify-end p-5 gap-5
+        @apply col-span-3 flex justify-end p-5 gap-5
     }
 
     /* END OF MAIN LAYOUT SECTION */
@@ -54,7 +61,7 @@
     /* SIGN IN PAGE SECTION AND SIGN UP PAGE SECTION */
 
     .form {
-        @apply bg-secondColor shadow shadow-secondColor lg:sm:w-4/12 w-9/12 rounded-2xl p-10 flex flex-col gap-5 justify-center text-center mx-auto;
+        @apply bg-secondColor shadow shadow-secondColor lg:sm:w-4/12 w-9/12 rounded-2xl p-10 flex flex-col gap-5 justify-center text-center mx-auto mb-10;
 
         /* animation section */
         @apply animate-fade-down animate-duration-700
@@ -96,6 +103,63 @@
 
     /* END OF SIGN IN PAGE SECTION AND SIGN UP PAGE SECTION*/
 
+    /* MAIN PAGE SECTION */
+    
+    .mainPage {
+        @apply text-secondColor flex flex-col gap-10 text-center text-[25px] lg:md:w-2/4 w-10/12 mx-auto mb-[100px]
+    }
+
+    .itemsContainer {
+        @apply flex flex-col gap-20
+    }
+
+    .item {
+        @apply bg-secondColor text-primaryColor grid grid-cols-2 grid-flow-row gap-5 p-10 rounded-2xl shadow-2xl shadow-secondColor
+    }
+
+    .imageOfItem {
+        @apply shadow-lg shadow-shadowColor p-5 rounded-xl min-h-[400px] lg:md:col-span-1 lg:sm:row-start-1 row-start-1 col-span-full flex items-center justify-center
+    }
+
+    .titleTag {
+        @apply text-[30px] font-bold
+    }
+
+    .infoOfItem {
+        @apply flex flex-col gap-3 items-center justify-center lg:md:col-span-1 lg:sm:row-start-1 
+        row-start-2 col-span-full p-5
+    }
+
+    .priceTag {
+        @apply bg-primaryColor px-4 py-2 text-secondColor rounded-lg
+    }
+
+    .descTag {
+        @apply bg-primaryColor p-3 text-secondColor rounded-xl text-[20px] max-w-full break-all
+    }
+
+    .amountTag {
+        @apply text-[20px]
+    }
+
+    .amountInput { 
+        @apply border-2 border-primaryColor text-center w-3/12 rounded-lg
+    }
+
+    .buttonBarItem {
+        @apply flex flex-row gap-5
+    }
+
+    .itemAddButton {
+        @apply shadow-inner shadow-shadowColor p-3 rounded-lg efectOfTransitionSlow;
+
+        /* hover */
+        @apply hover:shadow hover:shadow-green-500 hover:bg-green-500 hover:scale-105 hover:text-secondColor
+    }
+
+
+    /* END OF MAIN PAGE SECTION */
+
     /* ERROR PAGE SECTION */
     .errorPage {
         @apply text-center w-screen h-screen bg-primaryColor text-secondColor flex flex-col p-3 text-[50px] font-extrabold justify-center items-center;
@@ -117,7 +181,7 @@
     /* MESSAGE CONTAINER COMPONENT SECTION */
 
     .messageContainer {
-        @apply absolute w-1/6 m-5 text-primaryColor text-[15px] text-center flex flex-col gap-3
+        @apply fixed w-1/6 m-5 text-primaryColor text-[15px] text-center flex flex-col gap-3
         bottom-0
     }
 
@@ -130,5 +194,6 @@
     }
 
     /* END OF MESSAGE CONTAINER COMPONENT SECTION */
+
 
 }

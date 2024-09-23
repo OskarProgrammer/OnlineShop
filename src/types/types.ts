@@ -13,6 +13,14 @@ export type User = {
     password : string | undefined
 }
 
+export type ItemType = {
+    id : string,
+    name : string,
+    desc : string,
+    price : number,
+    amount : number
+}
+
 export type MessageType = {
     id : string,
     ownerID : string,
