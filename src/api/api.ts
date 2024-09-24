@@ -3,7 +3,8 @@
 import axios from "axios"
 
 // types
-import { CurrentUser, MessageType, User } from "../types/types"
+import { BasketItem, CurrentUser, MessageType, User } from "../types/types"
+
 
 
 export const deleteMessageById = async ({messageID} : { messageID : string }) => {
@@ -67,3 +68,11 @@ export const getMessagesOfUser = async (userID : string) => {
     return result
 }
 
+export const getBasketOfUser = async (userID : string | undefined) => {
+
+    const basketsItems = await axios.get(`http://localhost:3000/basket/`).then(res => res.data)
+
+    const result = basketsItems.filter( (item : BasketItem) => item.ownerID == userID )
+
+    return result
+}

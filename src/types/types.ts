@@ -38,3 +38,10 @@ export type CurrentUserParams = {
         isLogged : boolean
     }
 }
+
+export type BasketItem = {
+    id : string,
+    ownerID : string | undefined,
+    itemID : string | undefined,
+    amount : string | undefined
+}

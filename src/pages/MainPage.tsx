@@ -22,11 +22,15 @@ export const MainPage = () => {
             {isLoading ? <p>Loading...</p> : ""}
 
             <div className="itemsContainer">
-                {items?.map( (item : any, index : number) => (
-                    <ScrollAnimation key={item.id} animateOnce={true} offset={200} duration={1.3}  animatePreScroll={false} animateIn="fadeInUp" >
-                        <Item index={index} item={item}/>
-                    </ScrollAnimation>
-                ))}
+                {items?.map( (item : any, index : number) => {
+                    if (item.amount >= 1) {
+                        return (
+                            <ScrollAnimation key={item.id} animateOnce={true} offset={200} duration={1.3}  animatePreScroll={false} animateIn="fadeInUp" >
+                                <Item index={index} item={item}/>
+                            </ScrollAnimation>
+                        )
+                    }
+                })}
             </div>
 
         </div>

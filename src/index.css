@@ -27,16 +27,20 @@
     }
 
     .navBar {
-        @apply text-[25px] m-10 grid grid-cols-6 gap-x-5 gap-y-0 z-10 bg-secondColor p-3;
-        @apply border-8 border-secondColor rounded-xl
+        @apply text-[25px] m-10 grid grid-cols-6 gap-x-5 gap-y-0 z-10 bg-primaryColor p-3;
+        @apply rounded-xl
     }
 
     .navButton {
         @apply bg-secondColor text-primaryColor flex items-center  justify-center text-center
-        font-bold rounded-lg p-5 efectOfTransitionSlow shadow-inner shadow-shadowColor;
+        font-bold rounded-lg p-5 efectOfTransitionSlow shadow-inner shadow-shadowColor relative;
         
         /* hover effects */
         @apply hover:shadow-xl hover:scale-105 hover:shadow-shadowColor hover:bg-primaryColor hover:text-secondColor
+    }
+
+    .basketCounter {
+        @apply absolute text-sm bg-errorMessageColor p-3 rounded-full w-10 h-10 top-[-10px] right-[-10px] text-secondColor
     }
 
     .icon {
@@ -122,28 +126,46 @@
     }
 
     .titleTag {
-        @apply text-[30px] font-bold
+        @apply text-[30px] font-bold;
+
+        /* selection */
+        @apply selection:bg-primaryColor selection:text-secondColor
     }
 
     .infoOfItem {
         @apply flex flex-col gap-3 items-center justify-center lg:md:col-span-1 lg:sm:row-start-1 
-        row-start-2 col-span-full p-5
+        row-start-2 col-span-full p-5;
     }
 
     .priceTag {
-        @apply bg-primaryColor px-4 py-2 text-secondColor rounded-lg
+        @apply bg-primaryColor px-4 py-2 text-secondColor rounded-lg;
+
+         /* selection */
+         @apply selection:bg-secondColor selection:text-primaryColor
     }
 
     .descTag {
-        @apply bg-primaryColor p-3 text-secondColor rounded-xl text-[20px] max-w-full break-all
+        @apply bg-primaryColor p-3 text-secondColor rounded-xl text-[20px] max-w-full break-all;
+
+         /* selection */
+         @apply selection:bg-secondColor selection:text-primaryColor
     }
 
     .amountTag {
-        @apply text-[20px]
+        @apply text-[20px];
+        
+        /* selection */
+        @apply selection:bg-primaryColor selection:text-secondColor
     }
 
     .amountInput { 
-        @apply border-2 border-primaryColor text-center w-3/12 rounded-lg
+        @apply border-2 border-primaryColor text-center w-3/12 rounded-lg;
+
+        /* selection */
+        @apply selection:bg-primaryColor selection:text-secondColor;
+
+        /* focus */
+        @apply outline-none
     }
 
     .buttonBarItem {
@@ -151,10 +173,10 @@
     }
 
     .itemAddButton {
-        @apply shadow-inner shadow-shadowColor p-3 rounded-lg efectOfTransitionSlow;
+        @apply shadow-inner shadow-shadowColor p-3 rounded-lg efectOfTransition;
 
         /* hover */
-        @apply hover:shadow hover:shadow-green-500 hover:bg-green-500 hover:scale-105 hover:text-secondColor
+        @apply hover:shadow hover:bg-green-500 hover:scale-105 hover:text-secondColor
     }
 
 

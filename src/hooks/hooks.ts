@@ -3,7 +3,7 @@
 import { useQuery } from "react-query";
 
 // api
-import { getCurrentUser, getMessagesOfUser, getUserById, getUserByName } from "../api/api"
+import { getBasketOfUser, getCurrentUser, getMessagesOfUser, getUserById, getUserByName } from "../api/api"
 import axios from "axios";
 
 export const useCurrentUser = () => useQuery({
@@ -29,4 +29,9 @@ export const useMessagesOfUser = (userID : string) => useQuery({
 export const useItems = () => useQuery({
     queryFn : async () => await axios.get(`http://localhost:3000/items/`).then(res => res.data),
     queryKey : ["items"]
+})
+
+export const useBasketOfUser = ( userID : string | undefined) => useQuery({
+    queryFn : async ({queryKey}) => await getBasketOfUser(queryKey[1]),
+    queryKey : ["baskets", userID]
 })

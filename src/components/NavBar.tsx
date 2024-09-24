@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom"
 import { useMutation, useQueryClient } from "react-query"
 
 // hooks
-import { useCurrentUser } from "../hooks/hooks"
+import { useBasketOfUser, useCurrentUser } from "../hooks/hooks"
 
 // api
 import axios from "axios"
@@ -13,6 +13,9 @@ import axios from "axios"
 export const NavBar = () => {
 
     const { data : currentUser } = useCurrentUser()
+
+    const { data : basket } = useBasketOfUser(currentUser?.id)
+    
     
     const queryClient = useQueryClient()
 
@@ -64,6 +67,7 @@ export const NavBar = () => {
 
                             <NavLink to="/" className="navButton">
                                 <i className="bi bi-basket icon"/>
+                                { basket?.length != 0 ? <p className="basketCounter">{basket?.length}</p> : ""}
                             </NavLink>
 
                             <button onClick={()=>{ logOut() }} className="navButton">

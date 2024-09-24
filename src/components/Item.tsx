@@ -1,11 +1,81 @@
 
 // types
+import { BasketItem, ItemType } from "../types/types"
+
+// react
+import { useRef } from "react"
+import { useMutation, useQueryClient } from "react-query"
+
+// hooks
 import { useCurrentUser } from "../hooks/hooks"
-import { ItemType } from "../types/types"
+
+// api
+import axios from "axios"
 
 export const Item = ( { item , index } : { item : ItemType , index : number}) => {
 
     const { data : currentUser } = useCurrentUser()
+    const queryClient = useQueryClient()
+
+    const amountRef = useRef<HTMLInputElement>(null)
+    const idRef = useRef<HTMLInputElement>(null)
+
+
+    type Message = {
+        id : string,
+        ownerID : string | undefined,
+        message : string,
+        createdAt : Date
+    }
+
+    const addItemMutation = useMutation({
+        mutationFn : async ({newItem} : {newItem : BasketItem}) => await axios.post(`http://localhost:3000/basket/`, newItem),
+        onSuccess : () => {
+            queryClient.invalidateQueries(["baskets", currentUser?.id])
+        }
+    })
+
+    const newMessageMutation = useMutation({
+        mutationFn : async ({newMessage} : {newMessage : Message}) => axios.post(`http://localhost:3000/messages/`, newMessage),
+        onSuccess : () => {
+            queryClient.invalidateQueries(["messages", currentUser?.id])
+        }
+    })
+
+    const deleteAmountMutation = useMutation({
+        mutationFn : async ({newItemValue} : {newItemValue : ItemType}) => await axios.put(`http://localhost:3000/items/${newItemValue.id}`, newItemValue),
+        onSuccess : () => {
+            queryClient.invalidateQueries(["items"])
+        }
+    })
+
+    const addItemToBasket = async () => {
+
+        const newItemObject : BasketItem = {
+            id : crypto.randomUUID(),
+            ownerID : currentUser?.id,
+            itemID : idRef.current?.value,
+            // @ts-ignore
+            amount : parseInt(amountRef.current?.value)
+        }
+
+        addItemMutation.mutate({newItem : newItemObject})
+
+        const newMessage = {
+            id : crypto.randomUUID(),
+            ownerID : currentUser?.id,
+            message : `You have added ${amountRef.current?.value} amount of item ${item.name} for ${item.price}`,
+            createdAt : new Date()
+        }
+
+        newMessageMutation.mutate({ newMessage : newMessage})
+
+        // @ts-ignore
+        item.amount -= parseInt(amountRef.current?.value)
+
+        deleteAmountMutation.mutate({ newItemValue : item})
+    }
+
 
     const info = 
             <div className="infoOfItem">
@@ -17,12 +87,12 @@ export const Item = ( { item , index } : { item : ItemType , index : number}) =>
 
                 <p className="amountTag">Amount : {item.amount}</p>
 
-                {currentUser?.isLogged ? <input type="number" className="amountInput" defaultValue={1} min={1} max={item.amount}/> : ""}
+                {currentUser?.isLogged ? <input type="number" className="amountInput" ref={amountRef} defaultValue={1} min={1} max={item.amount}/> : ""}
 
-                <input  value={item.id} hidden readOnly/>
+                <input  value={item.id} hidden readOnly ref={idRef}/>
                 
                 {currentUser?.isLogged ? <div className="buttonBarItem">
-                    <button className="itemAddButton">Add Item</button>
+                    <button className="itemAddButton" onClick={()=>{addItemToBasket()}}>Add Item</button>
                     <button className="itemAddButton">Item Details</button>
                 </div> : ""}
             </div>
