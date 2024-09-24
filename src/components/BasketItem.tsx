@@ -3,15 +3,18 @@ import { BasketItemType } from "../types/types"
 
 type Props = {
     itemInfo : BasketItemType,
+    paymentList : any[],
     onAddToPaymentList : Function
 }
 
-export const BasketItem = ( { itemInfo, onAddToPaymentList } : Props) => {
+export const BasketItem = ( { itemInfo, paymentList, onAddToPaymentList } : Props) => {
 
     const { data : itemDetails, isLoading } = useItemByID(itemInfo.itemID)
 
+    const active = paymentList.some((e:any) => e.id == itemInfo.id)
+
     return (
-        <div className="basketItem">
+        <div className={`basketItem ${active ? "activeItem" : ""}`}>
             
             <div className="basketItemCheck">
                 {/* @ts-ignore */}

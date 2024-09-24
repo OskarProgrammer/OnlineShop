@@ -7,6 +7,9 @@ import { useBasketOfUser, useCurrentUser } from "../hooks/hooks"
 
 // components
 import { BasketItem } from "../components/BasketItem"
+import { PaymentTitle } from "../components/PaymentTitle"
+import { PageTitle } from "../components/PageTitle"
+import { PriceTag } from "../components/PriceTag"
 
 // types
 import { BasketItemType } from "../types/types"
@@ -42,28 +45,28 @@ export const BasketPage = () => {
 
         setItemsToPay(itemsToPay)
 
-        console.log(itemsToPay)
-
         calculateSumPrice()
     }
 
     return (
         <div className="basket">
-            
+            <PageTitle title="Basket"/>
+
             <div className="itemsBasket">
+
                 { loadingBasket ? "Loading basket..." : ""}
+
                 { basket?.length == 0 ? "Add items to basket..." : ""}
+
                 { basket?.map( ( item : BasketItemType ) => (
-                    <BasketItem key={item.id} itemInfo={item} onAddToPaymentList={addToPaymentList}/>
+                    <BasketItem key={item.id} itemInfo={item} paymentList={itemsToPay} onAddToPaymentList={addToPaymentList}/>
                 ))}
+
             </div>
 
             <div className="paymentBasket">
-                <p className="titlePaymentBasket">Payment Tab</p>
-                <p className="pricePaymentBasket">
-                    {sumPrice == 0 ? "Check items that you want to pay for" : `To pay : ${sumPrice}`}    
-                </p>
-
+                <PaymentTitle />
+                <PriceTag sumPrice={sumPrice}/>
             </div>
 
         </div>

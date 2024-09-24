@@ -9,6 +9,9 @@ import { useBasketOfUser, useCurrentUser } from "../hooks/hooks"
 // api
 import axios from "axios"
 
+// utils
+import { redirectToPage } from "../utils/utils"
+
 
 export const NavBar = () => {
 
@@ -28,6 +31,7 @@ export const NavBar = () => {
 
     const logOut = () => {
         currentUserMutation.mutate()
+        redirectToPage("/")
     }
 
     return (
