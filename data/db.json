@@ -32,7 +32,7 @@
       "name": "koszyk",
       "desc": "opis produktudsadsadsadsadasdasdasdsadsadasdaddsadasdsadfsadas",
       "price": 20,
-      "amount": 94
+      "amount": 88
     },
     {
       "id": "2",
@@ -49,5 +49,24 @@
       "amount": 100
     }
   ],
-  "basket": []
+  "basket": [
+    {
+      "id": "552b7a60-28b8-4508-ab75-5f899d951ca4",
+      "ownerID": "2",
+      "itemID": "1",
+      "amount": 1
+    },
+    {
+      "id": "bfe5c2e1-338b-449b-a98b-6dfbf3372d46",
+      "ownerID": "2",
+      "itemID": "1",
+      "amount": 1
+    },
+    {
+      "id": "240a370d-65da-49e8-8dad-67970278a615",
+      "ownerID": "2",
+      "itemID": "1",
+      "amount": 4
+    }
+  ]
 }

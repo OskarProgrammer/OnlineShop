@@ -31,6 +31,11 @@ export const useItems = () => useQuery({
     queryKey : ["items"]
 })
 
+export const useItemByID = ( itemID : string | undefined) => useQuery({
+    queryFn : async ({queryKey}) => await axios.get(`http://localhost:3000/items/${queryKey[1]}`).then(res => res.data),
+    queryKey : ["items", itemID]
+}) 
+
 export const useBasketOfUser = ( userID : string | undefined) => useQuery({
     queryFn : async ({queryKey}) => await getBasketOfUser(queryKey[1]),
     queryKey : ["baskets", userID]

@@ -39,7 +39,7 @@ export type CurrentUserParams = {
     }
 }
 
-export type BasketItem = {
+export type BasketItemType = {
     id : string,
     ownerID : string | undefined,
     itemID : string | undefined,
