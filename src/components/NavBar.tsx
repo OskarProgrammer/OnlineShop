@@ -65,7 +65,7 @@ export const NavBar = () => {
                 {currentUser?.isLogged ? 
                         <>
 
-                            <NavLink to="/" className="navButton">
+                            <NavLink to="/basket" className="navButton">
                                 <i className="bi bi-basket icon"/>
                                 { basket?.length != 0 ? <p className="basketCounter">{basket?.length}</p> : ""}
                             </NavLink>

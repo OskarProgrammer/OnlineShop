@@ -17,6 +17,7 @@ import { ErrorPage } from "./pages/ErrorPage"
 import { MainPage } from './pages/MainPage'
 import { SignInPage } from './pages/SignInPage'
 import { SignUpPage } from './pages/SignUpPage'
+import { BasketPage } from './pages/BasketPage'
 
 
 const queryClient = new QueryClient()
@@ -31,6 +32,9 @@ const router = createBrowserRouter(createRoutesFromElements(
 
       {/* path /signUp */}
       <Route path="signUp" element={<SignUpPage/>}/>
+
+      {/* path /basket */}
+      <Route path="basket" element={<BasketPage/>}/>
       
   </Route>
 ))

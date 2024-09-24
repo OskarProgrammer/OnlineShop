@@ -200,6 +200,37 @@
 
     /* END OF ERROR PAGE SECTION */
 
+    /* BASKET PAGE SECTION */
+
+    .basket {
+        @apply w-10/12 mx-auto rounded-xl grid grid-cols-5 gap-10 text-primaryColor text-[22px]
+    }
+
+    .itemsBasket {
+        @apply bg-secondColor col-span-3 flex flex-col gap-5 text-center p-5 rounded-xl justify-center;
+
+        /* animation */
+        @apply animate-fade-down
+    }
+
+    .paymentBasket {
+        @apply bg-secondColor col-span-2 flex flex-col gap-2 text-center p-5 rounded-xl;
+
+         /* animation */
+         @apply animate-fade-down 
+    }
+
+    .titlePaymentBasket {
+        @apply font-bold
+    }
+
+    .pricePaymentBasket { 
+        @apply text-[20px]
+    }
+
+
+    /* END OF BASKET PAGE SECTION */
+
     /* MESSAGE CONTAINER COMPONENT SECTION */
 
     .messageContainer {
