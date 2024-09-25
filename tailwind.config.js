@@ -12,8 +12,9 @@ export default {
           "secondColor" : "#f8fafc",
           "successColor" : "#22c55e",
           "shadowColor" : "#1e1b4b",
-          "formButtonBg" : "#16a34a",
           "shadowColorGreen" : "#052e16",
+          "shadowColorRed" : "#450a0a",
+          "formButtonBg" : "#16a34a",
           "errorMessageColor" : "#b91c1c" 
         }
       ,

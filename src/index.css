@@ -173,7 +173,7 @@
     }
 
     .itemAddButton {
-        @apply shadow-inner shadow-shadowColor p-3 rounded-lg efectOfTransition;
+        @apply shadow-inner shadow-shadowColor p-3 rounded-lg efectOfTransition text-[30px];
 
         /* hover */
         @apply hover:shadow hover:bg-green-500 hover:scale-105 hover:text-secondColor
@@ -248,6 +248,13 @@
         @apply flex flex-col gap-4
     }
 
+    .removeBasketItemButton { 
+        @apply shadow-inner shadow-shadowColorRed mx-auto col-span-full p-3 rounded-lg text-[25px] text-errorMessageColor efectOfTransition;
+
+        /* hover */
+        @apply hover:shadow hover:text-secondColor hover:bg-errorMessageColor hover:scale-105
+    }
+
     .paymentBasket {
         @apply bg-secondColor xl:sm:sticky lg:sticky top-1/4 lg:sm:col-span-2 row-start-1 col-span-full flex flex-col gap-2 text-center max-h-[500px] min-w-[400px] p-5 rounded-xl;
 
@@ -291,5 +298,20 @@
     }
 
     /* END OF PAYMENT FORM COMPONENT SECTION */
+
+    /* SCROLLBAR SECTION */
+
+    ::-webkit-scrollbar {
+        @apply bg-primaryColor;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        @apply bg-secondColor rounded-lg;
+
+        /* hover */
+        @apply hover:cursor-pointer;
+    }
+
+    /* END OF SCROLLBAR SECTION */
 
 }

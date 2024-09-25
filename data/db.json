@@ -1,7 +1,7 @@
 {
   "currentUser": {
-    "id": "2",
-    "isLogged": true
+    "id": "",
+    "isLogged": false
   },
   "users": [
     {
@@ -25,21 +25,28 @@
       "password": "123"
     }
   ],
-  "messages": [],
+  "messages": [
+    {
+      "id": "7c559ec7-f6c8-491f-aa0f-aaf945276ae0",
+      "ownerID": "2",
+      "message": "Successfully removed item from basket",
+      "createdAt": "2024-09-25T14:10:58.612Z"
+    }
+  ],
   "items": [
     {
       "id": "1",
       "name": "koszyk",
       "desc": "opis produktudsadsadsadsadasdasdasdsadsadasdaddsadasdsadfsadas",
       "price": 20,
-      "amount": 88
+      "amount": 86
     },
     {
       "id": "2",
       "name": "cos innego",
       "desc": "opis produktudsadsadsadsadasdasdasdsadsadasdaddsadasdsadfsadas",
       "price": 20,
-      "amount": 98
+      "amount": 96
     },
     {
       "id": "3",
@@ -49,24 +56,5 @@
       "amount": 100
     }
   ],
-  "basket": [
-    {
-      "id": "552b7a60-28b8-4508-ab75-5f899d951ca4",
-      "ownerID": "2",
-      "itemID": "1",
-      "amount": 1
-    },
-    {
-      "id": "bfe5c2e1-338b-449b-a98b-6dfbf3372d46",
-      "ownerID": "2",
-      "itemID": "1",
-      "amount": 1
-    },
-    {
-      "id": "240a370d-65da-49e8-8dad-67970278a615",
-      "ownerID": "2",
-      "itemID": "1",
-      "amount": 4
-    }
-  ]
+  "basket": []
 }

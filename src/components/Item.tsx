@@ -1,6 +1,10 @@
 
+// icons
+import { IoIosAdd } from "react-icons/io"
+import { CgDetailsMore } from "react-icons/cg"
+
 // types
-import { BasketItem, ItemType } from "../types/types"
+import { BasketItemType, ItemType } from "../types/types"
 
 // react
 import { useRef } from "react"
@@ -29,7 +33,7 @@ export const Item = ( { item , index } : { item : ItemType , index : number}) =>
     }
 
     const addItemMutation = useMutation({
-        mutationFn : async ({newItem} : {newItem : BasketItem}) => await axios.post(`http://localhost:3000/basket/`, newItem),
+        mutationFn : async ({newItem} : {newItem : BasketItemType}) => await axios.post(`http://localhost:3000/basket/`, newItem),
         onSuccess : () => {
             queryClient.invalidateQueries(["baskets", currentUser?.id])
         }
@@ -51,7 +55,7 @@ export const Item = ( { item , index } : { item : ItemType , index : number}) =>
 
     const addItemToBasket = async () => {
 
-        const newItemObject : BasketItem = {
+        const newItemObject : BasketItemType = {
             id : crypto.randomUUID(),
             ownerID : currentUser?.id,
             itemID : idRef.current?.value,
@@ -92,8 +96,8 @@ export const Item = ( { item , index } : { item : ItemType , index : number}) =>
                 <input  value={item.id} hidden readOnly ref={idRef}/>
                 
                 {currentUser?.isLogged ? <div className="buttonBarItem">
-                    <button className="itemAddButton" onClick={()=>{addItemToBasket()}}>Add Item</button>
-                    <button className="itemAddButton">Item Details</button>
+                    <button className="itemAddButton" onClick={()=>{addItemToBasket()}}><IoIosAdd/></button>
+                    <button className="itemAddButton"><CgDetailsMore/></button>
                 </div> : ""}
             </div>
     
