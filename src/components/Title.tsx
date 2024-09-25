@@ -5,9 +5,9 @@ type Props = {
     fontColor : string
 }
 
-export const Title = ({ text , fontSize = "text-[30px]", fontColor = "primaryColor"} : Props) => {
+export const Title = ({ text , fontSize = "text-[30px]", fontColor = "text-primaryColor"} : Props) => {
 
     return(
-        <p className={`font-bold ${fontSize} ${fontColor}`}>{text}</p>
+        <p className={`font-bold ${fontSize} ${fontColor} text-center`}>{text}</p>
     )
 }

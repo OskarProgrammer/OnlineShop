@@ -15,6 +15,7 @@ import { useCurrentUser } from "../hooks/hooks"
 
 // api
 import axios from "axios"
+import { NavLink } from "react-router-dom"
 
 export const Item = ( { item , index } : { item : ItemType , index : number}) => {
 
@@ -97,8 +98,11 @@ export const Item = ( { item , index } : { item : ItemType , index : number}) =>
                 
                 {currentUser?.isLogged ? <div className="buttonBarItem">
                     <button className="itemAddButton" onClick={()=>{addItemToBasket()}}><IoIosAdd/></button>
-                    <button className="itemAddButton"><CgDetailsMore/></button>
+                    <NavLink to={`/itemDetails/${item.id}`} className="itemAddButton hover:bg-primaryColor"><CgDetailsMore/></NavLink>
                 </div> : ""}
+
+                {!currentUser?.isLogged ? <NavLink to={`/itemDetails/${item.id}`} className="itemAddButton hover:bg-primaryColor"><CgDetailsMore/></NavLink> : ""}
+
             </div>
     
     const image = 

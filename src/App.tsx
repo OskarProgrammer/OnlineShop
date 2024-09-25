@@ -18,6 +18,7 @@ import { MainPage } from './pages/MainPage'
 import { SignInPage } from './pages/SignInPage'
 import { SignUpPage } from './pages/SignUpPage'
 import { BasketPage } from './pages/BasketPage'
+import { ItemDetailsPage } from './pages/ItemDetailsPage'
 
 
 const queryClient = new QueryClient()
@@ -35,6 +36,9 @@ const router = createBrowserRouter(createRoutesFromElements(
 
       {/* path /basket */}
       <Route path="basket" element={<BasketPage/>}/>
+
+      {/* path /itemDetails/:itemID */}
+      <Route path="itemDetails/:itemID" element={<ItemDetailsPage/>}/>
       
   </Route>
 ))

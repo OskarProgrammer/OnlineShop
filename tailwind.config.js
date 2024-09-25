@@ -8,7 +8,10 @@ export default {
     extend: {
       "colors": 
         {
-          "primaryColor" : "#6366f1",
+          // #f8fafc -- white 
+          // #6366f1 -- indigo
+          // #000000 -- black
+          "primaryColor" : "#6366f1", 
           "secondColor" : "#f8fafc",
           "successColor" : "#22c55e",
           "shadowColor" : "#1e1b4b",
