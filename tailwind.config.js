@@ -10,6 +10,7 @@ export default {
         {
           "primaryColor" : "#6366f1",
           "secondColor" : "#f8fafc",
+          "successColor" : "#22c55e",
           "shadowColor" : "#1e1b4b",
           "formButtonBg" : "#16a34a",
           "shadowColorGreen" : "#052e16",

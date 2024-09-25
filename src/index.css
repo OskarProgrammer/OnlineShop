@@ -218,7 +218,7 @@
     }
 
     .activeItem {
-        @apply border-4 border-green-500
+        @apply outline outline-8 outline-successColor
     }
 
     .basketItemCheck {
@@ -233,7 +233,7 @@
     }
 
     .basketItemInfo {
-        @apply  grid xl:lg:grid-cols-2 xl:lg:col-span-3 col-span-full gap-3 justify-center
+        @apply  grid xl:lg:grid-cols-2 xl:lg:col-span-3 col-span-full gap-y-4 justify-center px-5
     }
 
     .basketItemImage {
