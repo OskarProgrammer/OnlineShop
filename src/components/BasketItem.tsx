@@ -1,5 +1,6 @@
 import { useItemByID } from "../hooks/hooks"
 import { BasketItemType } from "../types/types"
+import { Title } from "./Title"
 
 type Props = {
     itemInfo : BasketItemType,
@@ -26,12 +27,17 @@ export const BasketItem = ( { itemInfo, paymentList, onAddToPaymentList } : Prop
                 {isLoading ? "Loading details of item" : ""}
 
                 <div className="basketItemDetailsInfo">
-                    <p className="font-bold">Details informations</p>
+
+                    <Title text="Details informations" fontSize="text-[22px]" fontColor="text-primaryColor"/>
+                    
                     <p>Name : {itemDetails?.name}</p>
+
                 </div>
 
                 <div className="basketItemPriceInfo">
-                    <p className="font-bold">Price Informations</p>
+
+                    <Title text="Price Informations" fontSize="text-[22px]" fontColor="text-primaryColor"/>
+                    
                     <p>Amount : {itemInfo?.amount} </p>
 
                     {/* @ts-ignore */}
@@ -39,6 +45,7 @@ export const BasketItem = ( { itemInfo, paymentList, onAddToPaymentList } : Prop
 
                     {/* @ts-ignore */}
                     <input type="checkbox" onChange={(e)=> { onAddToPaymentList(itemInfo, parseInt(itemInfo?.amount) * parseInt(itemDetails.price), e.target.checked) }} className="checkBoxBasketItem xl:sm:hidden block mx-auto"/>
+                
                 </div>
 
             </div>

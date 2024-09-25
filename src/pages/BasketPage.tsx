@@ -10,6 +10,7 @@ import { BasketItem } from "../components/BasketItem"
 import { PaymentTitle } from "../components/PaymentTitle"
 import { PageTitle } from "../components/PageTitle"
 import { PriceTag } from "../components/PriceTag"
+import { PaymentForm } from "../components/PaymentForm"
 
 // types
 import { BasketItemType } from "../types/types"
@@ -48,6 +49,7 @@ export const BasketPage = () => {
         calculateSumPrice()
     }
 
+
     return (
         <div className="basket">
             <PageTitle title="Basket"/>
@@ -65,8 +67,11 @@ export const BasketPage = () => {
             </div>
 
             <div className="paymentBasket">
+                
                 <PaymentTitle />
                 <PriceTag sumPrice={sumPrice}/>
+                <PaymentForm />
+
             </div>
 
         </div>

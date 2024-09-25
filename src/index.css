@@ -284,4 +284,12 @@
     /* END OF MESSAGE CONTAINER COMPONENT SECTION */
 
 
+    /* PAYMENT FORM COMPONENT SECTION */
+
+    .paymentForm {
+        @apply text-primaryColor flex flex-col gap-5 p-5 
+    }
+
+    /* END OF PAYMENT FORM COMPONENT SECTION */
+
 }
