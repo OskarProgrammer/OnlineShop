@@ -302,7 +302,37 @@
     /* PAYMENT FORM COMPONENT SECTION */
 
     .paymentForm {
-        @apply text-primaryColor flex flex-col gap-5 p-5 
+        @apply text-secondColor flex flex-col gap-5 p-5 bg-primaryColor rounded-2xl w-10/12 mx-auto mt-3;
+    
+        /* animation */
+        @apply animate-fade animate-duration-500
+    }
+
+    .paymentMethods {
+        @apply w-11/12 mx-auto flex flex-row gap-3 justify-center
+    }
+
+    .methodIcon {
+        @apply text-[34px]
+    }
+
+    .methodButton {
+        @apply flex flex-col shadow-inner shadow-shadowColor p-1 rounded-lg efectOfTransition h-16 w-16 justify-center items-center;
+
+        /* hover */
+        @apply hover:shadow hover:bg-secondColor hover:scale-105 hover:text-primaryColor
+
+    }
+
+    .iconDesc {
+        @apply text-[20px]
+    }
+
+    .generateButton {
+        @apply shadow-inner shadow-shadowColor p-1 w-3/12 mx-auto rounded-lg efectOfTransition text-[18px];
+
+        /* hover */
+        @apply hover:bg-secondColor hover:scale-105 hover:text-primaryColor hover:shadow
     }
 
     /* END OF PAYMENT FORM COMPONENT SECTION */

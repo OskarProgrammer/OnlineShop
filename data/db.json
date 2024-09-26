@@ -25,21 +25,14 @@
       "password": "123"
     }
   ],
-  "messages": [
-    {
-      "id": "22dc850a-1222-49f8-b665-4b4725949d18",
-      "ownerID": "2",
-      "message": "Successfully removed item from basket",
-      "createdAt": "2024-09-25T19:12:21.252Z"
-    }
-  ],
+  "messages": [],
   "items": [
     {
       "id": "1",
       "name": "koszyk",
       "desc": "opis produktudsadsadsadsadasdasdasdsadsadasdaddsadasdsadfsadas",
       "price": 20,
-      "amount": 85
+      "amount": 81
     },
     {
       "id": "2",
@@ -56,5 +49,49 @@
       "amount": 100
     }
   ],
-  "basket": []
+  "basket": [],
+  "orders": [
+    {
+      "id": "e1f084f5-b914-4fb3-aa76-9939e007d54c",
+      "name": "Order e1f084f5-b914-4fb3-aa76-9939e007d54c",
+      "itemsToPay": [
+        {
+          "id": "8dff3633-0e1d-4ebc-b75d-cae5b4f36b73",
+          "ownerID": "2",
+          "itemID": "1",
+          "amount": 1,
+          "sumPrice": 20
+        }
+      ],
+      "finalPrice": 20
+    },
+    {
+      "id": "e682d664-d1aa-46cb-85ff-539671362863",
+      "name": "Order e682d664-d1aa-46cb-85ff-539671362863",
+      "itemsToPay": [
+        {
+          "id": "783d59f3-9a8b-487a-ab23-1bc89325c2b1",
+          "ownerID": "2",
+          "itemID": "1",
+          "amount": 1,
+          "sumPrice": 20
+        }
+      ],
+      "finalPrice": 20
+    },
+    {
+      "id": "cf7f866e-6ab5-42f3-8eed-714752f382ef",
+      "name": "Order cf7f866e-6ab5-42f3-8eed-714752f382ef",
+      "itemsToPay": [
+        {
+          "id": "190725af-bb7f-4543-a3f4-001753e829f2",
+          "ownerID": "2",
+          "itemID": "1",
+          "amount": 1,
+          "sumPrice": 20
+        }
+      ],
+      "finalPrice": 20
+    }
+  ]
 }

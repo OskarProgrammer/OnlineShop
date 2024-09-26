@@ -111,12 +111,14 @@ export const BasketItem = ( { itemInfo, paymentList, onAddToPaymentList } : Prop
                 </div>
 
                 <button className="removeBasketItemButton" onClick={()=>{ removeItem() }} ><IoRemoveOutline /></button>
-
+    
             </div>
 
             <div className="basketItemImage">
                 IMAGE 
             </div>
+
+            <p className="col-span-full">ID : {itemInfo?.id} </p>
 
         </div>
     )

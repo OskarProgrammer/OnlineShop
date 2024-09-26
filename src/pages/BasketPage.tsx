@@ -22,8 +22,8 @@ export const BasketPage = () => {
     const { data : basket , isLoading : loadingBasket } = useBasketOfUser(currentUser?.id)
     
     let [sumPrice, setSumPrice] = useState(0)
-
-    let [itemsToPay, setItemsToPay] = useState<any[]>([])
+    let [itemsToPay, setItemsToPay] = useState<any []>([])
+    const [activeMethod , setActiveMethod] = useState(null)
 
     const calculateSumPrice = () => {
         sumPrice = 0
@@ -70,7 +70,11 @@ export const BasketPage = () => {
                 
                 <PaymentTitle />
                 <PriceTag sumPrice={sumPrice}/>
-                <PaymentForm />
+                { sumPrice != 0 ? <PaymentForm itemsToPay={itemsToPay}
+                                               sumPrice={sumPrice}
+                                               activeMethod={activeMethod}
+                                               onSetMethod={setActiveMethod}
+                                               onAddToPaymentList={addToPaymentList}/>  : ""}
 
             </div>
 
