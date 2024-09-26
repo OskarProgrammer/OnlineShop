@@ -4,7 +4,7 @@
 import { IoRemoveOutline } from "react-icons/io5";
 
 // hooks
-import { useItemByID } from "../hooks/hooks"
+import { useCreateMessageMutation, useItemByID, useRecoverAmountMutation, useRemoveItemFromBasketMutation } from "../hooks/hooks"
 
 // types
 import { BasketItemType, MessageType } from "../types/types"
@@ -13,11 +13,7 @@ import { BasketItemType, MessageType } from "../types/types"
 import { Title } from "./Title"
 
 // react
-import { useMutation, useQueryClient } from "react-query"
-
-// api
-import axios from "axios"
-import { recoverAmount } from "../utils/utils";
+import { useQueryClient } from "react-query"
 
 
 type Props = {
@@ -32,36 +28,15 @@ export const BasketItem = ( { itemInfo, paymentList, onAddToPaymentList } : Prop
 
     const { data : itemDetails, isLoading } = useItemByID(itemInfo.itemID)
 
+    const { mutate : recoverAmountMutation } = useRecoverAmountMutation(()=>{queryClient.invalidateQueries(["items"])})
+    const { mutate : createMessageMutation } = useCreateMessageMutation(()=>{queryClient.invalidateQueries(["messages" , itemInfo.ownerID])}) 
+    const { mutate : removeItemFromBasketMutation } = useRemoveItemFromBasketMutation(()=>{queryClient.invalidateQueries(["baskets", itemInfo.ownerID])})
+
     const active = paymentList.some((e:any) => e.id == itemInfo.id)
-
-    const removeItemMutation = useMutation({
-        mutationFn : async () => await axios.delete(`http://localhost:3000/basket/${itemInfo.id}`),
-        onSuccess : () => {
-            queryClient.invalidateQueries(["baskets", itemInfo.ownerID])
-        }
-    })
-
-    const recoverAmountMutation = useMutation({
-        mutationFn : recoverAmount,
-        onSuccess : () => {
-            queryClient.invalidateQueries(["items"])
-        }
-    })
-
-    const createMessageMutation = useMutation({
-        mutationFn : async ({newMessage} : { newMessage : MessageType}) => await axios.post(`http://localhost:3000/messages/`, newMessage),
-        onSuccess : () => {
-            queryClient.invalidateQueries(["messages" , itemInfo.ownerID])
-        }
-    })
 
     const removeItem = async () => {
         // @ts-ignore
         onAddToPaymentList(itemInfo, parseInt(itemInfo?.amount) * parseInt(itemDetails.price), false)
-        removeItemMutation.mutate()
-
-        // @ts-ignore
-        recoverAmountMutation.mutate({ itemID : itemInfo.itemID, amount : parseInt(itemInfo.amount)})
 
         const messageObject : MessageType= {
             id : crypto.randomUUID(),
@@ -69,9 +44,17 @@ export const BasketItem = ( { itemInfo, paymentList, onAddToPaymentList } : Prop
             ownerID : itemInfo.ownerID,
             message : "Successfully removed item from basket",
             createdAt : new Date()
-          }
+        }
 
-        createMessageMutation.mutate({newMessage : messageObject})
+        // removeItemMutation
+        removeItemFromBasketMutation({itemID : itemInfo?.id})
+
+        // recoverAmountMutation
+        // @ts-ignore
+        recoverAmountMutation( { itemID : itemInfo?.itemID , amount : parseInt(itemInfo?.amount)} )
+
+        // createMessageMutation
+        createMessageMutation({newMessage : messageObject})
     }
 
 

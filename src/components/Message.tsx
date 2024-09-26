@@ -1,13 +1,11 @@
 
 // react
-import { useMutation, useQueryClient } from "react-query"
+import { useQueryClient } from "react-query"
 import { useEffect, useState } from "react"
-
-// api
-import { deleteMessageById } from "../api/api"
 
 // types
 import { MessageType } from "../types/types"
+import { useRemoveMessageMutation } from "../hooks/hooks"
 
 
 type Props = {
@@ -21,21 +19,16 @@ export const Message = ({messageInfo} : Props) => {
     const maxTime = 5
     let [time , setTime] = useState(0)
 
-    const removeMessageMutation = useMutation({
-        mutationFn : deleteMessageById,
-        onSuccess : () => {
-            queryClient.invalidateQueries(["messages", messageInfo.ownerID])
-        }
-    })
+    const { mutate : removeMessageMutation } = useRemoveMessageMutation(()=>{queryClient.invalidateQueries(["messages", messageInfo.ownerID])})
 
     const removeMessage = () => {
-        removeMessageMutation.mutate({ messageID : messageInfo.id })
+        removeMessageMutation({ messageID : messageInfo.id })
     }
 
     useEffect(()=>{
         const interval = setInterval(()=>{
             if ( time == maxTime ) {
-                removeMessageMutation.mutate({ messageID : messageInfo.id })
+                removeMessageMutation({ messageID : messageInfo.id })
             }
 
             setTime(time++)

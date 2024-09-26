@@ -8,13 +8,10 @@ import { PiContactlessPayment } from "react-icons/pi"
 import { BsCash } from "react-icons/bs"
 
 // react 
-import { useMutation, useQueryClient } from "react-query"
-
-// api
-import axios from "axios"
+import { useQueryClient } from "react-query"
 
 // hooks
-import { useCurrentUser } from "../hooks/hooks"
+import { useCreateMessageMutation, useCreateOrderMutation, useCurrentUser, useRemoveItemFromBasket } from "../hooks/hooks"
 
 // types
 import { MessageType } from "../types/types"
@@ -25,26 +22,9 @@ export const PaymentForm = ( { sumPrice , itemsToPay , onSetMethod , onAddToPaym
     const queryClient = useQueryClient()
     const { data : currentUser } = useCurrentUser()
 
-    const removeItemFromBasket = useMutation({
-        mutationFn : async ({itemID} : {itemID : string}) => await axios.delete(`http://localhost:3000/basket/${itemID}`),
-        onSuccess : () => {
-            queryClient.invalidateQueries(["baskets", currentUser?.id])
-        }
-    })
-
-    const createOrder = useMutation({
-        mutationFn : async ({newOrder} : {newOrder : any}) => await axios.post(`http://localhost:3000/orders/`, newOrder),
-        onSuccess : () => {
-            queryClient.invalidateQueries(["orders"])
-        }
-    })
-
-    const createMessage = useMutation({
-        mutationFn : async ({newMessage} : {newMessage : MessageType}) => await axios.post(`http://localhost:3000/messages/`,newMessage),
-        onSuccess : () => {
-            queryClient.invalidateQueries(["messages" , currentUser?.id])
-        }
-    })
+    const { mutate : removeItemFromBasketMutation } = useRemoveItemFromBasket(()=>{queryClient.invalidateQueries(["baskets", currentUser?.id])}) 
+    const { mutate : createOrderMutation } = useCreateOrderMutation(()=>{queryClient.invalidateQueries(["orders"])})
+    const { mutate : createMessageMutation } = useCreateMessageMutation(()=>{ queryClient.invalidateQueries(["messages", currentUser?.id])})
 
     const generateOrder = async (method : string) => {
 
@@ -59,11 +39,11 @@ export const PaymentForm = ( { sumPrice , itemsToPay , onSetMethod , onAddToPaym
         }
 
         itemsToPay.map( (item) => {
-            removeItemFromBasket.mutate({ itemID : item.id})
+            removeItemFromBasketMutation({ itemID : item.id})
             onAddToPaymentList(item, item.sumPrice, false)
         })
 
-        createOrder.mutate({ newOrder : newOrderObject })
+        createOrderMutation({ newOrder : newOrderObject })
 
         const newMessageObject : MessageType = {
             id: crypto.randomUUID(),
@@ -73,7 +53,7 @@ export const PaymentForm = ( { sumPrice , itemsToPay , onSetMethod , onAddToPaym
             createdAt: new Date()
         }
 
-        createMessage.mutate({ newMessage : newMessageObject })
+        createMessageMutation({newMessage : newMessageObject})
         
     }
 

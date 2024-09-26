@@ -4,55 +4,28 @@ import { IoIosAdd } from "react-icons/io"
 import { CgDetailsMore } from "react-icons/cg"
 
 // types
-import { BasketItemType, ItemType } from "../types/types"
+import { BasketItemType, ItemType, MessageType } from "../types/types"
 
 // react
 import { useRef } from "react"
-import { useMutation, useQueryClient } from "react-query"
+import { useQueryClient } from "react-query"
+import { NavLink } from "react-router-dom"
 
 // hooks
-import { useCurrentUser } from "../hooks/hooks"
+import { useAddItemToBasketMutation, useCreateMessageMutation, useCurrentUser, useUpdateItemInfoMutation } from "../hooks/hooks"
 
-// api
-import axios from "axios"
-import { NavLink } from "react-router-dom"
 
 export const Item = ( { item , index } : { item : ItemType , index : number}) => {
 
     const { data : currentUser } = useCurrentUser()
     const queryClient = useQueryClient()
 
+    const { mutate : addItemToBasketMutation } = useAddItemToBasketMutation(()=>{queryClient.invalidateQueries(["baskets", currentUser?.id])})
+    const { mutate : newMessageMutation } = useCreateMessageMutation(()=>{queryClient.invalidateQueries(["messages", currentUser?.id])})
+    const { mutate : updateItemInfoMutation } = useUpdateItemInfoMutation(()=>{queryClient.invalidateQueries(["items"])})
+
     const amountRef = useRef<HTMLInputElement>(null)
     const idRef = useRef<HTMLInputElement>(null)
-
-
-    type Message = {
-        id : string,
-        ownerID : string | undefined,
-        message : string,
-        createdAt : Date
-    }
-
-    const addItemMutation = useMutation({
-        mutationFn : async ({newItem} : {newItem : BasketItemType}) => await axios.post(`http://localhost:3000/basket/`, newItem),
-        onSuccess : () => {
-            queryClient.invalidateQueries(["baskets", currentUser?.id])
-        }
-    })
-
-    const newMessageMutation = useMutation({
-        mutationFn : async ({newMessage} : {newMessage : Message}) => axios.post(`http://localhost:3000/messages/`, newMessage),
-        onSuccess : () => {
-            queryClient.invalidateQueries(["messages", currentUser?.id])
-        }
-    })
-
-    const deleteAmountMutation = useMutation({
-        mutationFn : async ({newItemValue} : {newItemValue : ItemType}) => await axios.put(`http://localhost:3000/items/${newItemValue.id}`, newItemValue),
-        onSuccess : () => {
-            queryClient.invalidateQueries(["items"])
-        }
-    })
 
     const addItemToBasket = async () => {
 
@@ -64,21 +37,25 @@ export const Item = ( { item , index } : { item : ItemType , index : number}) =>
             amount : parseInt(amountRef.current?.value)
         }
 
-        addItemMutation.mutate({newItem : newItemObject})
-
-        const newMessage = {
+        const newMessage : MessageType = {
             id : crypto.randomUUID(),
+            // @ts-ignore
             ownerID : currentUser?.id,
             message : `You have added ${amountRef.current?.value} amount of item ${item.name} for ${item.price}`,
             createdAt : new Date()
         }
 
-        newMessageMutation.mutate({ newMessage : newMessage})
+        // addItemMutation
+        addItemToBasketMutation({newItem : newItemObject})
+
+        // newMessageMutation
+        newMessageMutation({ newMessage : newMessage})
 
         // @ts-ignore
         item.amount -= parseInt(amountRef.current?.value)
 
-        deleteAmountMutation.mutate({ newItemValue : item})
+        // updateItemMutation
+        updateItemInfoMutation({ newItemValue : item})
     }
 
 

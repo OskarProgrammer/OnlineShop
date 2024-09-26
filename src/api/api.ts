@@ -3,11 +3,11 @@
 import axios from "axios"
 
 // types
-import { BasketItem, CurrentUser, MessageType, User } from "../types/types"
+import { BasketItemType, CurrentUser, MessageType, User } from "../types/types"
 
 
 
-export const deleteMessageById = async ({messageID} : { messageID : string }) => {
+export const deleteMessageById = async ( messageID : string ) => {
     try {
         await axios.delete(`http://localhost:3000/messages/${messageID}`)
     } catch { throw new Error("Error during removing message")}
@@ -72,7 +72,7 @@ export const getBasketOfUser = async (userID : string | undefined) => {
 
     const basketsItems = await axios.get(`http://localhost:3000/basket/`).then(res => res.data)
 
-    const result = basketsItems.filter( (item : BasketItem) => item.ownerID == userID )
+    const result = basketsItems.filter( (item : BasketItemType) => item.ownerID == userID )
 
     return result
 }

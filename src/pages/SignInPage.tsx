@@ -2,29 +2,22 @@
 // react
 import { useRef, useState } from "react"
 import { Link } from "react-router-dom"
-import { useMutation, useQueryClient } from "react-query"
+import { useQueryClient } from "react-query"
 
 // components
 import { PageTitle } from "../components/PageTitle"
 
 // api
 import { getUserByName } from "../api/api"
-import axios from "axios"
 
 // utils
 import { redirectToPage } from "../utils/utils"
 import { MessageType } from "../types/types"
+import { useCreateMessageMutation, useLogInMutation } from "../hooks/hooks"
 
 
 
 export const SignInPage = () => {
-
-    type CurrentUserParams = {
-        newCurrent : {
-            id : string | undefined,
-            isLogged : boolean
-        }
-    }
 
     const [error, setError] = useState<null | string>()
     let loginRef = useRef<HTMLInputElement>(null)
@@ -32,21 +25,8 @@ export const SignInPage = () => {
 
     const queryClient = useQueryClient()
 
-    const currentUserMutation = useMutation({
-        mutationFn : async ({ newCurrent } : CurrentUserParams) => await axios.put(`http://localhost:3000/currentUser/`, newCurrent),
-        onSuccess : () => {
-            queryClient.invalidateQueries(["currentUser"])
-        }
-    })
-
-    const currentUserMessagesMutation = useMutation({
-        mutationFn : ({newMessage} : {newMessage : { 
-            newMessage : {id: string, 
-            ownerID : string | undefined, 
-            message : string, 
-            createdAt: Date
-        }}}) => axios.post(`http://localhost:3000/messages/`, newMessage)
-    })
+    const { mutate : logInMutation } = useLogInMutation(()=>{queryClient.invalidateQueries(["currentUser"])})
+    const { mutate : createMessageMutation } = useCreateMessageMutation(()=>{queryClient.invalidateQueries(["messages"])})
 
     
     const signIn = async () => {
@@ -67,34 +47,20 @@ export const SignInPage = () => {
             return
         }
 
-        const newCurrentUser = {
-            id : userInfo?.id,
-            isLogged : true
-        }
+        // logInMutation
+        // @ts-ignore
+        logInMutation({ newCurrent : { id : userInfo?.id, isLogged : true}})
 
-        currentUserMutation.mutate({ newCurrent : newCurrentUser})
-
-
-        type newMessageType = {
-            id : string,
-            ownerID : string | undefined,
-            message : string,
-            createdAt : Date
-        }
-
-        const newMessage : {newMessage : newMessageType } = {
+        const newMessage : MessageType = {
             id : crypto.randomUUID(),
-            ownerID : newCurrentUser?.id,
+            // @ts-ignore
+            ownerID : userInfo?.id,
             message : "You have been successfully logged in",
             createdAt : new Date()
         }
 
-        currentUserMessagesMutation.mutate({
-            newMessage : newMessage }, {
-                onSuccess : () => {
-                    queryClient.invalidateQueries(["messages", newCurrentUser.id])
-                }
-            })
+        // createMessageMutation
+        createMessageMutation({newMessage : newMessage })
 
 
         redirectToPage("/")

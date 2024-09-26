@@ -12,7 +12,9 @@ export const scrollToPos = ( fromTop : number) => {
     window.scrollTo({ top: fromTop, behavior: 'smooth' });
 }
 
-export const recoverAmount = async ( {itemID, amount} : { itemID : string | undefined, amount : number}) => {
+export const recoverAmount = async ( itemID : string | undefined , amount : number ) => {
+
+    console.log(itemID, amount)
 
     let item = await axios.get(`http://localhost:3000/items/${itemID}`).then(res => res.data)
 

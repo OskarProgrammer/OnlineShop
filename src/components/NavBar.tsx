@@ -1,36 +1,26 @@
 
 // react
 import { NavLink } from "react-router-dom"
-import { useMutation, useQueryClient } from "react-query"
+import { useQueryClient } from "react-query"
 
 // hooks
-import { useBasketOfUser, useCurrentUser } from "../hooks/hooks"
-
-// api
-import axios from "axios"
+import { useBasketOfUser, useCurrentUser, useLogOutMutation } from "../hooks/hooks"
 
 // utils
 import { redirectToPage } from "../utils/utils"
 
 
 export const NavBar = () => {
-
-    const { data : currentUser } = useCurrentUser()
-
-    const { data : basket } = useBasketOfUser(currentUser?.id)
-    
     
     const queryClient = useQueryClient()
 
-    const currentUserMutation = useMutation({
-        mutationFn : async () => await axios.put(`http://localhost:3000/currentUser/`, {id : "", isLogged : false}),
-        onSuccess : () => {
-            queryClient.invalidateQueries(["currentUser"])
-        }
-    })
-
+    const { data : currentUser } = useCurrentUser()
+    const { data : basket } = useBasketOfUser(currentUser?.id)
+    
+    const { mutate : logOutMutation } = useLogOutMutation(()=>{queryClient.invalidateQueries(["currentUser"])})
+    
     const logOut = () => {
-        currentUserMutation.mutate()
+        logOutMutation()
         redirectToPage("/")
     }
 

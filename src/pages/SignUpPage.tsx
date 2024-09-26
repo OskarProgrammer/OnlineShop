@@ -2,20 +2,18 @@
 // react
 import { useRef, useState } from "react"
 import { Link } from "react-router-dom"
-import { useMutation, useQueryClient } from "react-query"
+import { useQueryClient } from "react-query"
 
 // components
 import { PageTitle } from "../components/PageTitle"
 
 // api
-import axios from "axios"
 import { getUserByName } from "../api/api"
-
-// types
-import { CreateAccountParams, CurrentUserParams } from "../types/types"
 
 // utils
 import { redirectToPage } from "../utils/utils"
+import { useCreateAccountMutation, useCreateMessageMutation, useLogInMutation } from "../hooks/hooks"
+import { MessageType } from "../types/types"
 
 
 export const SignUpPage = () => {
@@ -27,30 +25,11 @@ export const SignUpPage = () => {
     let confirmPasswordRef = useRef<HTMLInputElement>(null)
 
     const queryClient = useQueryClient()
+
+    const { mutate : createAccountMutation } = useCreateAccountMutation(() => {queryClient.invalidateQueries(["users"])})
+    const { mutate : logInMutation } = useLogInMutation(()=>{queryClient.invalidateQueries(["currentUser"])})
+    const { mutate : createMessageMutation } = useCreateMessageMutation(()=>{queryClient.invalidateQueries(["messages"])})
     
-    const createAccountMutation = useMutation({
-        mutationFn : async ({newUser} : CreateAccountParams) => await axios.post(`http://localhost:3000/users/`,newUser),
-        onSuccess : () => {
-            queryClient.invalidateQueries(["users"])
-        }
-    })
-
-    const currentUserMutation = useMutation({
-        mutationFn : async ({newCurrent} : CurrentUserParams) => await axios.put(`http://localhost:3000/currentUser/`,newCurrent),
-        onSuccess : () => {
-            queryClient.invalidateQueries(["currentUser"])
-        }
-    })
-
-    const newMessageMutation = useMutation({
-        mutationFn : ({newMessage} : {newMessage : { 
-            newMessage : {
-                id: string, 
-                ownerID : string | undefined, 
-                message : string, 
-                createdAt: Date
-        }}}) => axios.post(`http://localhost:3000/messages/`, newMessage)
-    })
 
     const signUp = async () => {
 
@@ -81,29 +60,21 @@ export const SignUpPage = () => {
             password : password
         }
 
-        createAccountMutation.mutate({ newUser : newUserObject} )
-        currentUserMutation.mutate({ newCurrent : { id : newUserObject.id, isLogged : true}})
-
-
-        type newMessageType = {
-            id : string,
-            ownerID : string | undefined,
-            message : string,
-            createdAt : Date
-        }
-
-        const newMessageObject : {newMessageObject : newMessageType }= {
+        const newMessageObject : MessageType= {
+            // @ts-ignore
             id : crypto.randomUUID(),
-            ownerID : newUserObject.id,
+            ownerID : newUserObject?.id,
             message : "You have created account successfully",
             createdAt : new Date()
         }
 
-        newMessageMutation.mutate({newMessage : newMessageObject},{
-            onSuccess : () => {
-                queryClient.invalidateQueries(["messages", newUserObject.id])
-            }
-        })
+        // createAccountMutation
+        createAccountMutation({ newUser : newUserObject} )
+        // logInMutation
+        logInMutation({ newCurrent : { id : newUserObject.id, isLogged : true}})
+        // createMessageMutation
+        createMessageMutation({newMessage : newMessageObject})
+
 
         redirectToPage("/")
     }
