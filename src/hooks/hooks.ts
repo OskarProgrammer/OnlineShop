@@ -3,7 +3,7 @@
 import { useMutation, useQuery } from "react-query";
 
 // api
-import { deleteMessageById, getBasketOfUser, getCurrentUser, getMessagesOfUser, getUserById, getUserByName } from "../api/api"
+import { deleteMessageById, getBasketOfUser, getCurrentUser, getMessagesOfUser, getReviewOfItem, getUserById, getUserByName } from "../api/api"
 import axios from "axios";
 
 // types
@@ -14,6 +14,7 @@ import { recoverAmount } from "../utils/utils";
 
 // queries
 
+// users
 export const useCurrentUser = () => useQuery({
     queryFn : () => getCurrentUser(),
     queryKey : ["currentUser"]
@@ -29,11 +30,15 @@ export const useUserByName = ( userName : string | undefined) => useQuery({
     queryKey : ["user", userName]
 })
 
+// messages
+
 export const useMessagesOfUser = (userID : string) => useQuery({
     queryFn : async ({queryKey}) => await getMessagesOfUser(queryKey[1]),
     queryKey : ["messages" , userID]
 })
 
+
+// items
 export const useItems = () => useQuery({
     queryFn : async () => await axios.get(`http://localhost:3000/items/`).then(res => res.data),
     queryKey : ["items"]
@@ -44,10 +49,19 @@ export const useItemByID = ( itemID : string | undefined) => useQuery({
     queryKey : ["items", itemID]
 }) 
 
+
+// basket 
 export const useBasketOfUser = ( userID : string | undefined) => useQuery({
     queryFn : async ({queryKey}) => await getBasketOfUser(queryKey[1]),
     queryKey : ["baskets", userID]
 })
+
+// reviews
+export const useReviewsOfItem = ( itemID : string | undefined) => useQuery({
+    queryFn : async ({queryKey}) => await getReviewOfItem(queryKey[1]),
+    queryKey : ["reviews", itemID]
+})
+
 
 // mutations 
 
@@ -109,5 +123,6 @@ export const useLogInMutation = ( onSuccess : Function ) => useMutation({
     mutationFn : async ({newCurrent} : CurrentUserParams) => await axios.put(`http://localhost:3000/currentUser/`,newCurrent),
     onSuccess : () => { onSuccess() }
 })
+
 
 

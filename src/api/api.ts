@@ -3,7 +3,7 @@
 import axios from "axios"
 
 // types
-import { BasketItemType, CurrentUser, MessageType, User } from "../types/types"
+import { BasketItemType, CurrentUser, MessageType, ReviewType, User } from "../types/types"
 
 
 
@@ -73,6 +73,15 @@ export const getBasketOfUser = async (userID : string | undefined) => {
     const basketsItems = await axios.get(`http://localhost:3000/basket/`).then(res => res.data)
 
     const result = basketsItems.filter( (item : BasketItemType) => item.ownerID == userID )
+
+    return result
+}
+
+export const getReviewOfItem = async (itemID : string | undefined) => {
+    
+    const reviews = await axios.get(`http://localhost:3000/reviews`).then(res => res.data)
+
+    let result = reviews.filter( (review : ReviewType) => review.itemID == itemID)
 
     return result
 }

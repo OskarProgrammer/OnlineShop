@@ -45,3 +45,11 @@ export type BasketItemType = {
     itemID : string | undefined,
     amount : string | undefined
 }
+
+export type ReviewType = {
+    id : string,
+    itemID : string,
+    ownerID : string,
+    reviewContent : string,
+    grade : number
+}

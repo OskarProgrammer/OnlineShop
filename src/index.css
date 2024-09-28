@@ -276,7 +276,35 @@
     /* ITEM DETAILS PAGE SECTION */
 
     .itemPageDiv {
-        @apply xl:sm:w-8/12 w-11/12 mx-auto bg-secondColor p-4 rounded-lg flex flex-col gap-3
+        @apply xl:sm:w-8/12 w-11/12 mx-auto bg-secondColor p-4 rounded-lg flex flex-col gap-3 mb-24
+    }
+
+    .itemDetailsContainer {
+        @apply grid grid-cols-4 gap-4 text-primaryColor
+    }
+
+    .leftSideOfItemDetailsContainer{
+        @apply xl/md:col-span-3 col-span-full p-4 text-[20px] text-center text-primaryColor flex items-center justify-center break-all
+    }
+
+    .rightSideOfItemDetailsContainer{
+        @apply xl/md:col-span-1 col-span-full flex flex-col gap-3
+    }
+
+    .itemImage {
+        @apply bg-primaryColor xl:sm:h-72 flex justify-center items-center rounded-3xl text-secondColor text-[40px] font-bold
+    }
+
+    .subImageButtonsBar{
+        @apply flex flex-row gap-5 justify-evenly text-primaryColor
+    }
+
+    .reviews {
+        @apply text-primaryColor text-center m-4
+    }
+
+    .amountTagItemDetails {
+        @apply text-center text-primaryColor text-2xl
     }
 
     /* END OF ITEM DETAILS PAGE SECTION */

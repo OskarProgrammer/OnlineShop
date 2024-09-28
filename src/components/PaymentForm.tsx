@@ -11,7 +11,7 @@ import { BsCash } from "react-icons/bs"
 import { useQueryClient } from "react-query"
 
 // hooks
-import { useCreateMessageMutation, useCreateOrderMutation, useCurrentUser, useRemoveItemFromBasket } from "../hooks/hooks"
+import { useCreateMessageMutation, useCreateOrderMutation, useCurrentUser, useRemoveItemFromBasketMutation } from "../hooks/hooks"
 
 // types
 import { MessageType } from "../types/types"
@@ -22,7 +22,7 @@ export const PaymentForm = ( { sumPrice , itemsToPay , onSetMethod , onAddToPaym
     const queryClient = useQueryClient()
     const { data : currentUser } = useCurrentUser()
 
-    const { mutate : removeItemFromBasketMutation } = useRemoveItemFromBasket(()=>{queryClient.invalidateQueries(["baskets", currentUser?.id])}) 
+    const { mutate : removeItemFromBasketMutation } = useRemoveItemFromBasketMutation(()=>{queryClient.invalidateQueries(["baskets", currentUser?.id])}) 
     const { mutate : createOrderMutation } = useCreateOrderMutation(()=>{queryClient.invalidateQueries(["orders"])})
     const { mutate : createMessageMutation } = useCreateMessageMutation(()=>{ queryClient.invalidateQueries(["messages", currentUser?.id])})
 
