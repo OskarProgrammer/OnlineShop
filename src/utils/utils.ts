@@ -25,3 +25,23 @@ export const recoverAmount = async ( itemID : string | undefined , amount : numb
     } catch { throw new Error("Error during recovering amount of items")}
 
 }
+
+export const generateArrayOfGrade = (grade : string) => {
+    const maxGrade = 5
+    const starsAmount = grade.split(".")
+
+    let stars = []
+    for (let i = 0 ; i < parseInt(starsAmount[0]) ; i++){
+        stars.push("full")
+    }
+
+    if (starsAmount[1] == "5") { 
+        stars.push("half")
+    }
+
+    for (let i = (parseInt(starsAmount[0]) + 1) ; i < maxGrade ; i++){
+        stars.push("empty")
+    }
+
+    return stars
+}

@@ -18,7 +18,8 @@ export default {
           "shadowColorGreen" : "#052e16",
           "shadowColorRed" : "#450a0a",
           "formButtonBg" : "#16a34a",
-          "errorMessageColor" : "#b91c1c" 
+          "errorMessageColor" : "#b91c1c",
+          "goldColor" : "#FFD700"
         }
       ,
       keyframes: {

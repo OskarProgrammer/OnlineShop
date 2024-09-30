@@ -9,12 +9,13 @@ import { useAddItemToBasketMutation, useCreateMessageMutation, useCurrentUser, u
 
 // components
 import { Title } from "../components/Title"
+import { ReviewTab } from "../components/ReviewTab"
 
 // icons
 import { IoMdAdd } from "react-icons/io"
 
 // types
-import { BasketItemType, MessageType } from "../types/types"
+import { BasketItemType, MessageType, ReviewType } from "../types/types"
 
 
 export const ItemDetailsPage = () => {
@@ -93,13 +94,21 @@ export const ItemDetailsPage = () => {
             </div>
 
             <div className="reviewsContainer">
+                
                 <Title text={`Reviews of item`} fontSize="text-[30px]" fontColor="text-primaryColor"/>
 
-                {reviewsLoading ? "Loading reviews" : "" }
-
                 <div className="reviews">
+
+                    {reviewsLoading ? "Loading reviews" : "" }
                     {reviewsData?.length == 0 ? "No reviews to display" : ""}
+
+                    {/* displaying reviews */}
+                    {reviewsData?.map( ( review : ReviewType ) => (
+                        <ReviewTab key={review.id} reviewInfo={review} />
+                    ))}
+
                 </div>
+
             </div>
 
         </div>

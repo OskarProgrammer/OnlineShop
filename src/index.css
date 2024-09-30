@@ -300,14 +300,34 @@
     }
 
     .reviews {
-        @apply text-primaryColor text-center m-4
+        @apply text-primaryColor text-center m-4  flex flex-col gap-5
     }
 
     .amountTagItemDetails {
         @apply text-center text-primaryColor text-2xl
     }
 
+    .reviewTab {
+        @apply bg-primaryColor lg:sm:w-10/12 w-10/12 mx-auto rounded-lg p-5 ps-10 text-secondColor flex flex-col gap-3 text-[18px] text-start
+    }
+
+    .reviewContent {
+        @apply bg-secondColor text-primaryColor p-3 rounded-lg
+    }
+
+    .authorOfReview {
+        @apply bg-secondColor w-2/6 text-primaryColor px-5 rounded-lg font-bold text-nowrap
+    }
+
     /* END OF ITEM DETAILS PAGE SECTION */
+
+    /* STARS COMPONENT SECTION */
+
+    .gradeTab {
+        @apply bg-secondColor w-2/6 rounded-lg text-goldColor text-[25px] px-5 text-nowrap flex flex-row 
+    }
+
+    /* END OF STARS COMPONENT SECTION */
 
     /* MESSAGE CONTAINER COMPONENT SECTION */
 

@@ -41,5 +41,20 @@
   ],
   "basket": [],
   "orders": [],
-  "reviews": []
+  "reviews": [
+    {
+      "id" : "1",
+      "itemID" : "1",
+      "ownerID" : "2",
+      "reviewContent" : "Some review",
+      "grade" : 5
+    },
+    {
+      "id" : "3",
+      "itemID" : "1",
+      "ownerID" : "2",
+      "reviewContent" : "Some review",
+      "grade" : 4.5
+    }
+  ]
 }
