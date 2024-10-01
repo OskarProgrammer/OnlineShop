@@ -256,7 +256,9 @@
     }
 
     .paymentBasket {
-        @apply bg-secondColor xl:sm:sticky lg:sticky top-1/4 lg:sm:col-span-2 row-start-1 col-span-full flex flex-col gap-2 text-center max-h-[500px] min-w-[400px] p-5 rounded-xl;
+        @apply bg-secondColor xl:sm:sticky lg:sticky top-1/4 lg:sm:col-span-2 row-start-1 col-span-full flex flex-col gap-2 text-center max-h-[500px] min-w-[400px] p-5 rounded-xl
+        outline outline-secondColor outline-4;
+        overflow-y: auto;
 
         /* animation */
         @apply animate-fade-down 

@@ -1,7 +1,7 @@
 {
   "currentUser": {
-    "id": "2",
-    "isLogged": true
+    "id": "",
+    "isLogged": false
   },
   "users": [
     {
@@ -22,7 +22,7 @@
       "name": "koszyk",
       "desc": "opis produktudsadsadsadsadasdasdasdsadsadasdaddsadasdsadfsadas",
       "price": 20,
-      "amount": 66
+      "amount": 64
     },
     {
       "id": "2",
@@ -43,18 +43,18 @@
   "orders": [],
   "reviews": [
     {
-      "id" : "1",
-      "itemID" : "1",
-      "ownerID" : "2",
-      "reviewContent" : "Some review",
-      "grade" : 5
+      "id": "1",
+      "itemID": "1",
+      "ownerID": "2",
+      "reviewContent": "Some review",
+      "grade": 5
     },
     {
-      "id" : "3",
-      "itemID" : "1",
-      "ownerID" : "2",
-      "reviewContent" : "Some review",
-      "grade" : 4.5
+      "id": "3",
+      "itemID": "1",
+      "ownerID": "2",
+      "reviewContent": "Some review",
+      "grade": 4.5
     }
   ]
 }

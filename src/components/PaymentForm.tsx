@@ -15,6 +15,7 @@ import { useCreateMessageMutation, useCreateOrderMutation, useCurrentUser, useRe
 
 // types
 import { MessageType } from "../types/types"
+import { CashPaymentForm } from "./CashPaymentForm"
 
 
 export const PaymentForm = ( { sumPrice , itemsToPay , onSetMethod , onAddToPaymentList , activeMethod } : { sumPrice : number , itemsToPay : any[] , onSetMethod : Function , onAddToPaymentList : Function , activeMethod : String | null } ) => {
@@ -26,7 +27,7 @@ export const PaymentForm = ( { sumPrice , itemsToPay , onSetMethod , onAddToPaym
     const { mutate : createOrderMutation } = useCreateOrderMutation(()=>{queryClient.invalidateQueries(["orders"])})
     const { mutate : createMessageMutation } = useCreateMessageMutation(()=>{ queryClient.invalidateQueries(["messages", currentUser?.id])})
 
-    const generateOrder = async (method : string) => {
+    const generateOrder = async (method : string , deliveryInfo : { city : string, zipCode : string, street : string}) => {
 
         const orderID = crypto.randomUUID()
 
@@ -35,7 +36,8 @@ export const PaymentForm = ( { sumPrice , itemsToPay , onSetMethod , onAddToPaym
             name : `Order ${orderID}`,
             itemsToPay : itemsToPay,
             finalPrice : sumPrice,
-            method : method
+            method : method,
+            deliveryInfo : deliveryInfo
         }
 
         itemsToPay.map( (item) => {
@@ -80,7 +82,7 @@ export const PaymentForm = ( { sumPrice , itemsToPay , onSetMethod , onAddToPaym
 
             { activeMethod == "transfer" ? <p>Transfer</p> : ""}
             { activeMethod == "blik" ? <p>Blik</p> : ""}
-            { activeMethod == "cash" ? <button onClick={()=>{generateOrder("Cash")}} className="generateButton">Generate order</button> : ""}
+            { activeMethod == "cash" ? <CashPaymentForm onGenerateOrder={generateOrder} /> : ""}
 
         </div>
     )
