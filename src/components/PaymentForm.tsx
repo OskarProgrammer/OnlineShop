@@ -17,6 +17,7 @@ import { useCreateMessageMutation, useCreateOrderMutation, useCurrentUser, useRe
 import { MessageType } from "../types/types"
 import { CashPaymentForm } from "./CashPaymentForm"
 import { BlikPaymentForm } from "./BlikPaymentForm"
+import { CardPaymentForm } from "./CardPaymentForm"
 
 
 export const PaymentForm = ( { sumPrice , itemsToPay , onSetMethod , onAddToPaymentList , activeMethod } : { sumPrice : number , itemsToPay : any[] , onSetMethod : Function , onAddToPaymentList : Function , activeMethod : String | null } ) => {
@@ -35,6 +36,7 @@ export const PaymentForm = ( { sumPrice , itemsToPay , onSetMethod , onAddToPaym
         const newOrderObject = {
             id : orderID,
             name : `Order ${orderID}`,
+            ownerID : currentUser?.id,
             itemsToPay : itemsToPay,
             finalPrice : sumPrice,
             method : method,
@@ -81,7 +83,7 @@ export const PaymentForm = ( { sumPrice , itemsToPay , onSetMethod , onAddToPaym
 
             </div>
 
-            { activeMethod == "transfer" ? <p>Transfer</p> : ""}
+            { activeMethod == "transfer" ? <CardPaymentForm onGenerateOrder={generateOrder}/> : ""}
             { activeMethod == "blik" ? <BlikPaymentForm onGenerateOrder={generateOrder} /> : ""}
             { activeMethod == "cash" ? <CashPaymentForm onGenerateOrder={generateOrder} /> : ""}
 

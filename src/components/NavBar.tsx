@@ -34,7 +34,7 @@ export const NavBar = () => {
                 </NavLink>
 
                 {currentUser?.isLogged ? 
-                        <NavLink to="/" className="navButton">
+                        <NavLink to="/userInfo" className="navButton">
                             {currentUser.login}
                         </NavLink> : ""}
                 

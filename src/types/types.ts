@@ -53,3 +53,13 @@ export type ReviewType = {
     reviewContent : string,
     grade : number
 }
+
+export type OrderType = {
+    id : string,
+    name : string,
+    ownerID : string,
+    itemsToPay : [],
+    finalPrice : number,
+    method : string,
+    deliveryInfo : {}
+}

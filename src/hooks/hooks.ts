@@ -3,7 +3,7 @@
 import { useMutation, useQuery } from "react-query";
 
 // api
-import { deleteMessageById, getBasketOfUser, getCurrentUser, getMessagesOfUser, getReviewOfItem, getUserById, getUserByName } from "../api/api"
+import { deleteMessageById, getBasketOfUser, getCurrentUser, getMessagesOfUser, getOrdersOfUser, getReviewOfItem, getUserById, getUserByName } from "../api/api"
 import axios from "axios";
 
 // types
@@ -62,6 +62,12 @@ export const useReviewsOfItem = ( itemID : string | undefined) => useQuery({
     queryKey : ["reviews", itemID]
 })
 
+
+// orders
+export const useOrdersOfUser = ( userID : string | undefined) => useQuery({
+    queryFn : async ({queryKey}) => await getOrdersOfUser(queryKey[1]),
+    queryKey : ["orders", userID] 
+})
 
 // mutations 
 

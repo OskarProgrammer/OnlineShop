@@ -275,6 +275,18 @@
 
     /* END OF BASKET PAGE SECTION */
 
+    /* USER INFO PAGE SECTION */
+
+    .orders { 
+        @apply bg-secondColor w-10/12 rounded text-primaryColor text-center p-5 flex flex-col gap-5
+    }
+
+    .ordersList {
+        @apply grid xl:lg:grid-cols-4 lg:sm:grid-cols-2 grid-cols-1 gap-10
+    }
+
+    /* END OF USER INFO PAGE SECTION */
+
     /* ITEM DETAILS PAGE SECTION */
 
     .itemPageDiv {
@@ -401,5 +413,13 @@
     }
 
     /* END OF SCROLLBAR SECTION */
+
+    /* UTILS SECTION */
+
+    .loadingState {
+        @apply text-secondColor text-[30px] text-center xl:lg:w-3/12 lg:sm:w-3/12 w-10/12 mx-auto shadow-2xl shadow-secondColor bg-secondColor rounded-lg text-primaryColor
+    }
+
+    /* END OF UTILS SECTION */
 
 }

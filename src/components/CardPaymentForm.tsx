@@ -1,15 +1,17 @@
 import { useRef, useState } from "react"
 
 type Props = {
-    onGenerateOrder : Function 
+    onGenerateOrder : Function
 }
 
-export const BlikPaymentForm = ({onGenerateOrder} : Props) => {
+export const CardPaymentForm = ({onGenerateOrder} : Props) => {
 
     const cityRef = useRef<null | HTMLInputElement >( null )
     const zipCodeRef = useRef<null | HTMLInputElement >( null )
     const streetRef = useRef<null | HTMLInputElement >( null )
-    const blikCodeRef = useRef<null | HTMLInputElement >( null )
+
+    const cardNumberRef = useRef<null | HTMLInputElement >( null )
+    const cnCodeRef = useRef<null | HTMLInputElement >( null )
 
     const [errorMessage, setErrorMessage] = useState<string>()
 
@@ -19,11 +21,10 @@ export const BlikPaymentForm = ({onGenerateOrder} : Props) => {
             return
         }
 
-        // blik code validation
-        if ( blikCodeRef.current?.value == "") {
-            setErrorMessage("You have to put valid blik code")
-            return 
-        } 
+        if ( cardNumberRef.current?.value == "" || cnCodeRef.current?.value == "" ) {
+            setErrorMessage("You have to fill card informations")
+            return
+        }
 
         const deliveryInfo = {
             city : cityRef.current?.value,
@@ -31,13 +32,14 @@ export const BlikPaymentForm = ({onGenerateOrder} : Props) => {
             streetRef : streetRef.current?.value
         }
 
-        onGenerateOrder("Blik", deliveryInfo)
+        onGenerateOrder("Card", deliveryInfo)
     }
 
     return (
-        <>
-            <p>Blik Code</p>
-            <input type="number" className="inputOfForm text-sm" ref={blikCodeRef} placeholder="Blik Code"/>
+        <>  
+            <p>Card Info</p>
+            <input type="number" className="inputOfForm text-sm" ref={cardNumberRef} placeholder="Card Number"/>
+            <input type="number" className="inputOfForm text-sm" ref={cnCodeRef} placeholder="Code"/>
 
             <p>Delivery Info</p>
             <input type="text" className="inputOfForm text-sm" ref={cityRef} placeholder="City"/>

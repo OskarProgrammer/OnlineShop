@@ -29,9 +29,11 @@ export const CashPaymentForm = ({onGenerateOrder} : Props) => {
 
     return (
         <>
+            <p>Delivery Info</p>
             <input type="text" className="inputOfForm text-sm" ref={cityRef} placeholder="City"/>
             <input type="text" className="inputOfForm text-sm" ref={zipCodeRef} placeholder="Zip Code"/>
             <input type="text" className="inputOfForm text-sm" ref={streetRef} placeholder="Street"/>
+            
             {errorMessage != null ? <p className="errorMessageForm text-secondColor font-bold">{errorMessage}</p> : ""}
             <button onClick={()=>{generateOrder()}} className="generateButton">Generate order</button>
         </>
