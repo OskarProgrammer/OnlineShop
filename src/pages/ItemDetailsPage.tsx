@@ -85,9 +85,11 @@ export const ItemDetailsPage = () => {
                     <p className="amountTagItemDetails">Amount : {itemData?.amount}</p>
                     {currentUser?.isLogged ? <input type="number" className="amountInput mx-auto text-[20px]" ref={amountRef} defaultValue={1} min={1} max={itemData?.amount}/> : ""}
                     
-                    <div className="subImageButtonsBar">
-                        <button onClick={() => {addItemToBasket()} } className="icon itemAddButton"><IoMdAdd/></button>
-                    </div>
+                    {currentUser?.isLogged ?
+                        <div className="subImageButtonsBar">
+                            <button onClick={() => {addItemToBasket()} } className="icon itemAddButton"><IoMdAdd/></button>
+                        </div> 
+                    : ""}
 
                 </div>
 

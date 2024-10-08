@@ -3,7 +3,7 @@
 import axios from "axios"
 
 // types
-import { BasketItemType, CurrentUser, MessageType, OrderType, ReviewType, User } from "../types/types"
+import { BasketItemType, CurrentUser, ItemType, MessageType, OrderType, ReviewType, User } from "../types/types"
 
 
 
@@ -95,4 +95,42 @@ export const getOrdersOfUser = async (userID : string | undefined) => {
     const result = orders.filter( (order : OrderType) => order.ownerID == userID )
 
     return result
+}
+
+export const getItemsOfUser = async (userID : string | undefined) => {
+
+    // getting userInfo
+    const userInfo = await axios.get(`http://localhost:3000/users/${userID}`).then(res=>res.data)
+
+    // getting allItems
+    const items = await axios.get(`http://localhost:3000/items/`).then(res=>res.data)
+
+    // filtring
+    const result = items.filter( (item : ItemType) => userInfo.items.includes(item.id))
+
+    return result
+}
+
+export const postNewItem = async (newItemObject : ItemType) => {
+
+    try {
+        await axios.post(`http://localhost:3000/items/`, newItemObject)
+    } catch {
+        throw new Error("Something went wrong during creating item")
+    }
+
+}
+
+export const putItemToUser = async (userID : string, itemID : string) => {
+
+    let user = await axios.get(`http://localhost:3000/users/${userID}`).then(res => res.data)
+
+    user.items.push(itemID)
+
+    try { 
+        await axios.put(`http://localhost:3000/users/${userID}`,user)
+    } catch {
+        throw new Error("Error during updating user data")
+    }
+
 }

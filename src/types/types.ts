@@ -61,5 +61,6 @@ export type OrderType = {
     itemsToPay : [],
     finalPrice : number,
     method : string,
-    deliveryInfo : {}
+    deliveryInfo : {},
+    status : string
 }

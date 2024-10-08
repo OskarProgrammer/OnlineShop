@@ -40,7 +40,8 @@ export const PaymentForm = ( { sumPrice , itemsToPay , onSetMethod , onAddToPaym
             itemsToPay : itemsToPay,
             finalPrice : sumPrice,
             method : method,
-            deliveryInfo : deliveryInfo
+            deliveryInfo : deliveryInfo,
+            status : "Preparing"
         }
 
         itemsToPay.map( (item) => {

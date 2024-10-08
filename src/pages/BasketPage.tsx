@@ -44,6 +44,8 @@ export const BasketPage = () => {
             itemsToPay = itemsToPay.filter(e => e.id != itemInfo.id)
         }
 
+        console.log(itemsToPay)
+
         setItemsToPay(itemsToPay)
 
         calculateSumPrice()

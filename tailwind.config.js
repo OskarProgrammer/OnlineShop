@@ -14,6 +14,7 @@ export default {
           "primaryColor" : "#6366f1", 
           "secondColor" : "#f8fafc",
           "successColor" : "#22c55e",
+          "darkerSuccessColor" : "#007b35",
           "shadowColor" : "#1e1b4b",
           "shadowColorGreen" : "#052e16",
           "shadowColorRed" : "#450a0a",

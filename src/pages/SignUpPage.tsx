@@ -57,7 +57,8 @@ export const SignUpPage = () => {
         const newUserObject = {
             id : crypto.randomUUID(),
             login : login,
-            password : password
+            password : password,
+            items : []
         }
 
         const newMessageObject : MessageType= {

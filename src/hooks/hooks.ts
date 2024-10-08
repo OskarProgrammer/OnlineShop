@@ -3,7 +3,7 @@
 import { useMutation, useQuery } from "react-query";
 
 // api
-import { deleteMessageById, getBasketOfUser, getCurrentUser, getMessagesOfUser, getOrdersOfUser, getReviewOfItem, getUserById, getUserByName } from "../api/api"
+import { deleteMessageById, getBasketOfUser, getCurrentUser, getItemsOfUser, getMessagesOfUser, getOrdersOfUser, getReviewOfItem, getUserById, getUserByName, postNewItem, putItemToUser } from "../api/api"
 import axios from "axios";
 
 // types
@@ -48,6 +48,11 @@ export const useItemByID = ( itemID : string | undefined) => useQuery({
     queryFn : async ({queryKey}) => await axios.get(`http://localhost:3000/items/${queryKey[1]}`).then(res => res.data),
     queryKey : ["items", itemID]
 }) 
+
+export const useItemsOfUser = ( userID : string | undefined ) => useQuery({
+    queryFn : async ({queryKey}) => await getItemsOfUser(queryKey[1]),
+    queryKey : ["items", userID]
+})
 
 
 // basket 
@@ -113,6 +118,11 @@ export const useUpdateItemInfoMutation = ( onSuccess : Function ) => useMutation
     onSuccess : () => { onSuccess() }
 })
 
+export const useCreateNewItemMutation = ( onSuccess : Function ) => useMutation({
+    mutationFn : async ({newItem} : {newItem : ItemType}) => await postNewItem(newItem),
+    onSuccess : () => { onSuccess() }
+})
+
 // user
 
 export const useLogOutMutation = ( onSuccess : Function) => useMutation({
@@ -129,6 +139,14 @@ export const useLogInMutation = ( onSuccess : Function ) => useMutation({
     mutationFn : async ({newCurrent} : CurrentUserParams) => await axios.put(`http://localhost:3000/currentUser/`,newCurrent),
     onSuccess : () => { onSuccess() }
 })
+
+export const useAddItemToUserMutation = ( onSuccess : Function) => useMutation({
+    mutationFn : async ({ userID , itemID } : { userID : string , itemID : string }) => await putItemToUser( userID , itemID ),
+    onSuccess : ()=>{
+        onSuccess()
+    }
+})
+
 
 
 

@@ -278,11 +278,37 @@
     /* USER INFO PAGE SECTION */
 
     .orders { 
-        @apply bg-secondColor w-10/12 rounded text-primaryColor text-center p-5 flex flex-col gap-5
+        @apply bg-secondColor w-10/12 rounded text-primaryColor text-center p-5 flex flex-col gap-5 
     }
 
     .ordersList {
         @apply grid xl:lg:grid-cols-4 lg:sm:grid-cols-2 grid-cols-1 gap-10
+    }
+
+    .items {
+        @apply bg-secondColor w-10/12 rounded text-primaryColor text-center p-5 flex flex-col gap-5
+    }
+
+    .itemsList {
+        @apply grid xl:lg:grid-cols-4 lg:sm:grid-cols-2 grid-cols-1 gap-10
+    }
+
+    .itemAddButton {
+        @apply efectOfTransition bg-successColor shadow-inner shadow-darkerSuccessColor text-secondColor text-[20px] mx-auto;
+
+        /* hover */
+        @apply hover:shadow-md 
+    }
+
+    .newItemForm {
+        @apply fixed z-30 outline outline-primaryColor bg-primaryColor p-12 xl:lg:w-5/12 w-8/12 top-1/4 rounded-lg flex flex-col gap-3;
+    }
+
+    .closeFormButton {
+        @apply efectOfTransition absolute w-24 bg-errorMessageColor p-3 rounded-lg top-[-15px] right-[-15px] text-center font-bold;
+
+        /* hover */
+        @apply hover:scale-110;
     }
 
     /* END OF USER INFO PAGE SECTION */
