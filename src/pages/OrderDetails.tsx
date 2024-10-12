@@ -1,6 +1,6 @@
 import { useParams } from "react-router"
 import { useCurrentUser, useOrderByID } from "../hooks/hooks"
-import { ItemType, OrderItemType } from "../types/types"
+import { OrderItemType } from "../types/types"
 import { ItemInOrder } from "../components/ItemInOrder"
 
 
@@ -37,6 +37,9 @@ export const OrderDetails = () => {
             
             {/* method */}
             <p className="xl:md:col-span-1 col-span-full bg-primaryColor text-secondColor rounded-lg p-3 m-3 font-bold">Method : {orderInfo.method}</p>
+
+            {/* status */}
+            <p className="col-span-full bg-primaryColor text-secondColor rounded-lg p-3 m-3 font-bold">{orderInfo.status}</p>
 
             {/* list of items */}
             <div className="col-span-full bg-primaryColor text-secondColor m-3 p-3 rounded-lg flex flex-col gap-5">

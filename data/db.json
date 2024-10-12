@@ -32,7 +32,7 @@
       "name": "koszyk",
       "desc": "opis produktudsadsadsadsadasdasdasdsadsadasdaddsadasdsadfsadas",
       "price": 20,
-      "amount": 56
+      "amount": 54
     },
     {
       "id": "2",
@@ -77,6 +77,50 @@
         "city": "s",
         "zipCode": "s",
         "streetRef": "s"
+      },
+      "status": "Preparing"
+    },
+    {
+      "id": "111df663-de68-474a-ad02-59bda1d26d9f",
+      "name": "Order 111df663-de68-474a-ad02-59bda1d26d9f",
+      "ownerID": "2",
+      "itemsToPay": [
+        {
+          "id": "0766ab52-fc3f-4a9d-b48f-2a69e8c5e0b3",
+          "ownerID": "2",
+          "itemID": "1",
+          "amount": 1,
+          "sumPrice": 20
+        }
+      ],
+      "finalPrice": 20,
+      "method": "Cash",
+      "deliveryInfo": {
+        "city": "sd",
+        "zipCode": "s",
+        "streetRef": "s"
+      },
+      "status": "Preparing"
+    },
+    {
+      "id": "310e86ae-ad7e-4972-a120-fe9eae70767a",
+      "name": "Order 310e86ae-ad7e-4972-a120-fe9eae70767a",
+      "ownerID": "2",
+      "itemsToPay": [
+        {
+          "id": "1368af54-50e6-4f1e-a8a8-ed6b7c8b8f29",
+          "ownerID": "2",
+          "itemID": "1",
+          "amount": 1,
+          "sumPrice": 20
+        }
+      ],
+      "finalPrice": 20,
+      "method": "Blik",
+      "deliveryInfo": {
+        "city": "2",
+        "zipCode": "2",
+        "streetRef": "2"
       },
       "status": "Preparing"
     }

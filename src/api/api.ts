@@ -5,17 +5,18 @@ import axios from "axios"
 // types
 import { BasketItemType, CurrentUser, ItemType, MessageType, OrderType, ReviewType, User } from "../types/types"
 
-
+// constants
+import { BASE } from "../constants/const"
 
 export const deleteMessageById = async ( messageID : string ) => {
     try {
-        await axios.delete(`http://localhost:3000/messages/${messageID}`)
+        await axios.delete(`${BASE}messages/${messageID}`)
     } catch { throw new Error("Error during removing message")}
 }
 
 export const getCurrentUser = async () => {
 
-    let currentUser : CurrentUser = await axios.get(`http://localhost:3000/currentUser/`).then(res => res.data)
+    let currentUser : CurrentUser = await axios.get(`${BASE}currentUser/`).then(res => res.data)
 
     if (!currentUser.isLogged){
         return currentUser
@@ -24,7 +25,7 @@ export const getCurrentUser = async () => {
     let currentUserInfo : User | null = null
 
     try{
-        currentUserInfo = await axios.get(`http://localhost:3000/users/${currentUser.id}`).then(res => res.data)
+        currentUserInfo = await axios.get(`${BASE}users/${currentUser.id}`).then(res => res.data)
     } catch { throw new Error("Error during fetching data")}
 
     currentUser = {...currentUser, ...currentUserInfo}
@@ -36,7 +37,7 @@ export const getUserById = async (userID : string) => {
     let user : User | null = null
 
     try {
-        user = await axios.get(`http://localhost:3000/users/${userID}`).then(res => res.data)
+        user = await axios.get(`${BASE}users/${userID}`).then(res => res.data)
     } catch { throw new Error("Error during fetching data")}
 
     return user
@@ -48,7 +49,7 @@ export const getUserByName = async (userName : string | undefined) : Promise<Use
     if (userName == undefined) { return null }
 
     try {
-        users = await axios.get(`http://localhost:3000/users/`).then(res => res.data)
+        users = await axios.get(`${BASE}users/`).then(res => res.data)
     } catch { throw new Error("Error during fetching data")}
 
     const user = users?.filter((e : User) => e.login == userName)
@@ -61,7 +62,7 @@ export const getUserByName = async (userName : string | undefined) : Promise<Use
 }
 
 export const getMessagesOfUser = async (userID : string) => {
-    const messages = await axios.get(`http://localhost:3000/messages/`).then(res => res.data)
+    const messages = await axios.get(`${BASE}messages/`).then(res => res.data)
 
     const result = messages.filter( (message : MessageType) => message.ownerID == userID)
 
@@ -70,7 +71,7 @@ export const getMessagesOfUser = async (userID : string) => {
 
 export const getBasketOfUser = async (userID : string | undefined) => {
 
-    const basketsItems = await axios.get(`http://localhost:3000/basket/`).then(res => res.data)
+    const basketsItems = await axios.get(`${BASE}basket/`).then(res => res.data)
 
     const result = basketsItems.filter( (item : BasketItemType) => item.ownerID == userID )
 
@@ -79,7 +80,7 @@ export const getBasketOfUser = async (userID : string | undefined) => {
 
 export const getReviewOfItem = async (itemID : string | undefined) => {
     
-    const reviews = await axios.get(`http://localhost:3000/reviews`).then(res => res.data)
+    const reviews = await axios.get(`${BASE}reviews`).then(res => res.data)
 
     let result = reviews.filter( (review : ReviewType) => review.itemID == itemID)
 
@@ -89,7 +90,7 @@ export const getReviewOfItem = async (itemID : string | undefined) => {
 export const getOrdersOfUser = async (userID : string | undefined) => {
 
     // getting all orders
-    const orders = await axios.get('http://localhost:3000/orders/').then( res => res.data)
+    const orders = await axios.get(`${BASE}orders/`).then( res => res.data)
 
     // filtring
     const result = orders.filter( (order : OrderType) => order.ownerID == userID )
@@ -100,13 +101,15 @@ export const getOrdersOfUser = async (userID : string | undefined) => {
 export const getItemsOfUser = async (userID : string | undefined) => {
 
     // getting userInfo
-    const userInfo = await axios.get(`http://localhost:3000/users/${userID}`).then(res=>res.data)
+    const userInfo = await axios.get(`${BASE}users/${userID}`).then(res=>res.data)
 
     // getting allItems
-    const items = await axios.get(`http://localhost:3000/items/`).then(res=>res.data)
+    const items = await axios.get(`${BASE}items/`).then(res=>res.data)
 
     // filtring
     const result = items.filter( (item : ItemType) => userInfo.items.includes(item.id))
+
+    console.log(result)
 
     return result
 }
@@ -114,7 +117,7 @@ export const getItemsOfUser = async (userID : string | undefined) => {
 export const postNewItem = async (newItemObject : ItemType) => {
 
     try {
-        await axios.post(`http://localhost:3000/items/`, newItemObject)
+        await axios.post(`${BASE}items/`, newItemObject)
     } catch {
         throw new Error("Something went wrong during creating item")
     }
@@ -123,12 +126,12 @@ export const postNewItem = async (newItemObject : ItemType) => {
 
 export const putItemToUser = async (userID : string, itemID : string) => {
 
-    let user = await axios.get(`http://localhost:3000/users/${userID}`).then(res => res.data)
+    let user = await axios.get(`${BASE}users/${userID}`).then(res => res.data)
 
     user.items.push(itemID)
 
     try { 
-        await axios.put(`http://localhost:3000/users/${userID}`,user)
+        await axios.put(`${BASE}users/${userID}`,user)
     } catch {
         throw new Error("Error during updating user data")
     }

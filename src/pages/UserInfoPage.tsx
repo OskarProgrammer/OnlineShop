@@ -69,7 +69,7 @@ export const UserInfoPage = () => {
                 
                 <div className="ordersList">
                     { orders?.map( (order : OrderType) => (
-                        <OrderTab order={order} />
+                        <OrderTab key={order.id} order={order} />
                     ))}
                 </div>
 

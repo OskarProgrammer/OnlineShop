@@ -1,16 +1,20 @@
 
 // react
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query"
 
 // api
 import { deleteMessageById, getBasketOfUser, getCurrentUser, getItemsOfUser, getMessagesOfUser, getOrdersOfUser, getReviewOfItem, getUserById, getUserByName, postNewItem, putItemToUser } from "../api/api"
-import axios from "axios";
+import axios from "axios"
 
 // types
-import { BasketItemType, CreateAccountParams, CurrentUserParams, ItemType, MessageType } from "../types/types";
+import { BasketItemType, CreateAccountParams, CurrentUserParams, ItemType, MessageType } from "../types/types"
 
 // utils
-import { recoverAmount } from "../utils/utils";
+import { recoverAmount } from "../utils/utils"
+
+// constants
+import { BASE } from "../constants/const"
+
 
 // queries
 
@@ -40,12 +44,12 @@ export const useMessagesOfUser = (userID : string) => useQuery({
 
 // items
 export const useItems = () => useQuery({
-    queryFn : async () => await axios.get(`http://localhost:3000/items/`).then(res => res.data),
+    queryFn : async () => await axios.get(`${BASE}items/`).then(res => res.data),
     queryKey : ["items"]
 })
 
 export const useItemByID = ( itemID : string | undefined) => useQuery({
-    queryFn : async ({queryKey}) => await axios.get(`http://localhost:3000/items/${queryKey[1]}`).then(res => res.data),
+    queryFn : async ({queryKey}) => await axios.get(`${BASE}items/${queryKey[1]}`).then(res => res.data),
     queryKey : ["items", itemID]
 }) 
 
@@ -75,7 +79,7 @@ export const useOrdersOfUser = ( userID : string | undefined) => useQuery({
 })
 
 export const useOrderByID = ( orderID : string | undefined ) => useQuery({
-    queryFn : async ({queryKey}) => await axios.get(`http://localhost:3000/orders/${queryKey[1]}`).then(res => res.data),
+    queryFn : async ({queryKey}) => await axios.get(`${BASE}orders/${queryKey[1]}`).then(res => res.data),
     queryKey : ["order", orderID]
 })
 
@@ -83,7 +87,7 @@ export const useOrderByID = ( orderID : string | undefined ) => useQuery({
 
 // messages
 export const useCreateMessageMutation = ( onSuccess : Function) => useMutation({
-    mutationFn : async ({newMessage} : {newMessage : MessageType}) => await axios.post(`http://localhost:3000/messages/`,newMessage),
+    mutationFn : async ({newMessage} : {newMessage : MessageType}) => await axios.post(`${BASE}messages/`,newMessage),
     onSuccess : () => { onSuccess() }
 })
 
@@ -95,19 +99,19 @@ export const useRemoveMessageMutation = ( onSuccess : Function) => useMutation({
 // orders
 
 export const useCreateOrderMutation = ( onSuccess : Function) => useMutation({
-    mutationFn : async ({newOrder} : {newOrder : any}) => await axios.post(`http://localhost:3000/orders/`, newOrder),
+    mutationFn : async ({newOrder} : {newOrder : any}) => await axios.post(`${BASE}orders/`, newOrder),
     onSuccess : () => { onSuccess() }
 })
 
 // basket
 
 export const useRemoveItemFromBasketMutation = ( onSuccess : Function ) =>useMutation({
-    mutationFn : async ({itemID} : {itemID : string}) => await axios.delete(`http://localhost:3000/basket/${itemID}`),
+    mutationFn : async ({itemID} : {itemID : string}) => await axios.delete(`${BASE}basket/${itemID}`),
     onSuccess : () => { onSuccess() }
 })
 
 export const useAddItemToBasketMutation = ( onSuccess : Function ) => useMutation({
-    mutationFn : async ({newItem} : {newItem : BasketItemType}) => await axios.post(`http://localhost:3000/basket/`, newItem),
+    mutationFn : async ({newItem} : {newItem : BasketItemType}) => await axios.post(`${BASE}basket/`, newItem),
     onSuccess : () => { onSuccess() }
 })
 
@@ -119,7 +123,7 @@ export const useRecoverAmountMutation = ( onSuccess : Function ) =>useMutation({
 })
 
 export const useUpdateItemInfoMutation = ( onSuccess : Function ) => useMutation({
-    mutationFn : async ({newItemValue} : {newItemValue : ItemType}) => await axios.put(`http://localhost:3000/items/${newItemValue.id}`, newItemValue),
+    mutationFn : async ({newItemValue} : {newItemValue : ItemType}) => await axios.put(`${BASE}items/${newItemValue.id}`, newItemValue),
     onSuccess : () => { onSuccess() }
 })
 
@@ -131,17 +135,17 @@ export const useCreateNewItemMutation = ( onSuccess : Function ) => useMutation(
 // user
 
 export const useLogOutMutation = ( onSuccess : Function) => useMutation({
-    mutationFn : async () => await axios.put(`http://localhost:3000/currentUser/`, {id : "", isLogged : false}),
+    mutationFn : async () => await axios.put(`${BASE}currentUser/`, {id : "", isLogged : false}),
     onSuccess : () => { onSuccess() }
 })
 
 export const useCreateAccountMutation = ( onSuccess : Function ) =>useMutation({
-    mutationFn : async ({newUser} : CreateAccountParams) => await axios.post(`http://localhost:3000/users/`,newUser),
+    mutationFn : async ({newUser} : CreateAccountParams) => await axios.post(`${BASE}users/`,newUser),
     onSuccess : () => { onSuccess() }
 })
 
 export const useLogInMutation = ( onSuccess : Function ) => useMutation({
-    mutationFn : async ({newCurrent} : CurrentUserParams) => await axios.put(`http://localhost:3000/currentUser/`,newCurrent),
+    mutationFn : async ({newCurrent} : CurrentUserParams) => await axios.put(`${BASE}currentUser/`,newCurrent),
     onSuccess : () => { onSuccess() }
 })
 
