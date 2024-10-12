@@ -74,6 +74,11 @@ export const useOrdersOfUser = ( userID : string | undefined) => useQuery({
     queryKey : ["orders", userID] 
 })
 
+export const useOrderByID = ( orderID : string | undefined ) => useQuery({
+    queryFn : async ({queryKey}) => await axios.get(`http://localhost:3000/orders/${queryKey[1]}`).then(res => res.data),
+    queryKey : ["order", orderID]
+})
+
 // mutations 
 
 // messages

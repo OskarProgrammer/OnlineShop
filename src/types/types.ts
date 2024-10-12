@@ -64,3 +64,11 @@ export type OrderType = {
     deliveryInfo : {},
     status : string
 }
+
+export type OrderItemType = {
+    id : string,
+    ownerID : string,
+    itemID : string,
+    amount : number,
+    sumPrice : number
+  }

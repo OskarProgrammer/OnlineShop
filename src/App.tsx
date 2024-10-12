@@ -20,6 +20,7 @@ import { SignUpPage } from './pages/SignUpPage'
 import { BasketPage } from './pages/BasketPage'
 import { ItemDetailsPage } from './pages/ItemDetailsPage'
 import { UserInfoPage } from './pages/UserInfoPage'
+import { OrderDetails } from './pages/OrderDetails'
 
 
 const queryClient = new QueryClient()
@@ -40,6 +41,9 @@ const router = createBrowserRouter(createRoutesFromElements(
 
       {/* path /itemDetails/:itemID */}
       <Route path="itemDetails/:itemID" element={<ItemDetailsPage/>}/>
+
+      {/* path /orderDetails/:orderID */}
+      <Route path="orderDetails/:orderID" element={<OrderDetails/>}/>
 
       {/* path /userInfo */}
       <Route path="userInfo" element={<UserInfoPage/>}/>

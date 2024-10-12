@@ -53,7 +53,7 @@ export const UserInfoPage = () => {
                 {items?.length != 0 ? <p className="text-[30px]">Your Items : {items?.length}</p> : <p className="text-[30px]">No items to display</p>}
                 
                 <div className="itemsList">
-                    { items.map( (item : ItemType) => (
+                    { items?.map( (item : ItemType) => (
                         <ItemTab item={item}/>
                     ))}
                 </div>
@@ -68,7 +68,7 @@ export const UserInfoPage = () => {
                 {orders?.length != 0 ? <p className="text-[30px]">Your Orders : {orders?.length}</p> : <p className="text-[30px]">No orders to display</p>}
                 
                 <div className="ordersList">
-                    { orders.map( (order : OrderType) => (
+                    { orders?.map( (order : OrderType) => (
                         <OrderTab order={order} />
                     ))}
                 </div>

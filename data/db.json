@@ -1,7 +1,7 @@
 {
   "currentUser": {
-    "id": "",
-    "isLogged": false
+    "id": "2",
+    "isLogged": true
   },
   "users": [
     {
@@ -32,14 +32,14 @@
       "name": "koszyk",
       "desc": "opis produktudsadsadsadsadasdasdasdsadsadasdaddsadasdsadfsadas",
       "price": 20,
-      "amount": 60
+      "amount": 56
     },
     {
       "id": "2",
       "name": "cos innego",
       "desc": "opis produktudsadsadsadsadasdasdasdsadsadasdaddsadasdsadfsadas",
       "price": 20,
-      "amount": 96
+      "amount": 94
     },
     {
       "id": "3",
@@ -52,24 +52,31 @@
   "basket": [],
   "orders": [
     {
-      "id": "edfbd823-8f7b-4d94-88b0-5ad8214318f3",
-      "name": "Order edfbd823-8f7b-4d94-88b0-5ad8214318f3",
-      "ownerID": "a865233a-b702-43f6-9198-1a06e8059c7d",
+      "id": "b867b4ad-27d8-426e-80d5-23cc63eb5b11",
+      "name": "Order b867b4ad-27d8-426e-80d5-23cc63eb5b11",
+      "ownerID": "2",
       "itemsToPay": [
         {
-          "id": "ded1fe20-13e6-4379-9bc3-96e5b33688a7",
-          "ownerID": "a865233a-b702-43f6-9198-1a06e8059c7d",
+          "id": "30760a2d-4bde-429a-a5b9-39a88431c1f6",
+          "ownerID": "2",
           "itemID": "1",
+          "amount": 1,
+          "sumPrice": 20
+        },
+        {
+          "id": "48d3b95a-7a94-430a-9228-438e2d5d7e05",
+          "ownerID": "2",
+          "itemID": "2",
           "amount": 1,
           "sumPrice": 20
         }
       ],
-      "finalPrice": 20,
+      "finalPrice": 40,
       "method": "Cash",
       "deliveryInfo": {
-        "city": "2",
-        "zipCode": "2",
-        "streetRef": "2"
+        "city": "s",
+        "zipCode": "s",
+        "streetRef": "s"
       },
       "status": "Preparing"
     }
