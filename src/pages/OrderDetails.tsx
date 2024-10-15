@@ -47,7 +47,7 @@ export const OrderDetails = () => {
 
                 <div className="grid xl:lg:grid-cols-2 grid-cols-1">
                     {orderInfo.itemsToPay?.map(( item : OrderItemType ) => (
-                        <ItemInOrder key={item.id} itemInfo={item} />
+                        <ItemInOrder key={item.id} itemInfo={item} currentUser={currentUserInfo}/>
                     ))}
                 </div>
 

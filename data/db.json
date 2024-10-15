@@ -139,6 +139,20 @@
       "ownerID": "2",
       "reviewContent": "Some review",
       "grade": 4.5
+    },
+    {
+      "id": "a812ce98-60b0-4dc3-ade4-619fb3a3236a",
+      "itemID": "1",
+      "ownerID": "2",
+      "reviewContent": "swietny przedmiot",
+      "grade": 4
+    },
+    {
+      "id": "f62a4c07-71b3-4400-8619-9d0f8bf8c9ea",
+      "itemID": "1",
+      "ownerID": "2",
+      "reviewContent": "swietny przedmiot",
+      "grade": 5
     }
   ]
 }

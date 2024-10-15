@@ -12,6 +12,7 @@ export default {
           // #6366f1 -- indigo
           // #000000 -- black
           "primaryColor" : "#6366f1", 
+          "darkerPrimaryColor" : "#20216e",
           "secondColor" : "#f8fafc",
           "successColor" : "#22c55e",
           "darkerSuccessColor" : "#007b35",

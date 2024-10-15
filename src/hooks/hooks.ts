@@ -7,7 +7,7 @@ import { deleteMessageById, getBasketOfUser, getCurrentUser, getItemsOfUser, get
 import axios from "axios"
 
 // types
-import { BasketItemType, CreateAccountParams, CurrentUserParams, ItemType, MessageType } from "../types/types"
+import { BasketItemType, CreateAccountParams, CurrentUserParams, ItemType, MessageType, ReviewType } from "../types/types"
 
 // utils
 import { recoverAmount } from "../utils/utils"
@@ -83,7 +83,11 @@ export const useOrderByID = ( orderID : string | undefined ) => useQuery({
     queryKey : ["order", orderID]
 })
 
-// mutations 
+// MUTATIONS
+//
+// 
+// 
+// 
 
 // messages
 export const useCreateMessageMutation = ( onSuccess : Function) => useMutation({
@@ -95,6 +99,14 @@ export const useRemoveMessageMutation = ( onSuccess : Function) => useMutation({
     mutationFn : ( { messageID : messageID } : { messageID : string }) => deleteMessageById(messageID) ,
     onSuccess : () => { onSuccess() }
 })
+
+
+// reviews
+export const useCreateReviewMutation = ( onSuccess : Function) => useMutation({
+    mutationFn : async ( {newReview : newReview} : { newReview : ReviewType}) => await axios.post('http://localhost:3000/reviews/',newReview),
+    onSuccess : () => { onSuccess() }
+})
+
 
 // orders
 
